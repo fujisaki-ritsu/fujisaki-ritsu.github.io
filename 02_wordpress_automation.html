@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown原稿から WordPress へ記事を一括公開する｜REST API × PowerShell の実装ガイド | 藤崎 律</title>
+<meta name="description" content="WordPress への記事入稿を手作業で続けている現場に向けて、Markdown原稿を REST API 経由で一括投稿する仕組みを、PowerShell と Application Password を使って実装する手順を解説します。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #2b6cb0;
+    --bg: #fdfdfb;
+    --note-bg: #f7f5ee;
+    --note-border: #d4c98a;
+    --code-bg: #f4f4ef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.9;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #1a4770;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: var(--sub);
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.85;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 15px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f2efe3;
+    font-weight: 700;
+    width: 34%;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+  pre.code {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin: 20px 0 28px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+    color: #222;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13.5px;
+  }
+  .disclaimer {
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    margin: 40px 0 24px;
+    font-size: 13.5px;
+    color: var(--sub);
+    line-height: 1.8;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.85; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    th, td { padding: 8px 10px; font-size: 14px; }
+    pre.code { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">WORDPRESS AUTOMATION ・ 執筆：藤崎 律 ・ 想定読了時間 8分</div>
+  <h1>Markdown原稿からWordPressへ記事を一括公開する｜REST API × PowerShellの実装ガイド</h1>
+
+  <p class="lead">
+    納品した記事を1本ずつWordPressに貼り付けていくと、1記事あたり20〜30分、10本で半日が消えます。この記事は、Markdown形式で用意した原稿を、WordPress REST APIとPowerShellスクリプトで一括公開する仕組みを、認証から実装、運用の落とし穴までまとめたものです。ローカルの検証環境で動作確認した構成そのままを、現場で使える形で解説します。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">WordPress入稿を自動化するべき3つの場面</a></li>
+      <li><a href="#s2">構成の全体像と、使う技術スタック</a></li>
+      <li><a href="#s3">認証はApplication Passwordで統一する</a></li>
+      <li><a href="#s4">Markdown原稿を投稿可能なHTMLに変換する</a></li>
+      <li><a href="#s5">PowerShellから REST API に POSTする実装</a></li>
+      <li><a href="#s6">運用で押さえておきたい3つの落とし穴</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. WordPress入稿を自動化するべき3つの場面</h2>
+  <p>WordPressの管理画面は、1本の記事を丁寧に仕上げるのに向いています。一方で、同じ作業が繰り返される局面では、手数の多さがそのまま納期と疲労に跳ね返ります。次の3つは、自動化の投資対効果が特に高い場面です。</p>
+
+  <h3>場面1：オウンドメディアの大量入稿</h3>
+  <p>月に20〜30本の記事を運用しているメディアでは、入稿作業そのものが「見出しタグ化・内部リンク・画像alt付与」といった定型作業の反復になります。1本あたり20分の作業時間でも、30本で10時間。ここが自動化対象の筆頭です。</p>
+
+  <h3>場面2：ライターから納品されたMarkdown原稿の下書き化</h3>
+  <p>最近は、ライター側がMarkdown形式で納品してくるケースが増えてきました。これをコピペで貼ると改行が崩れ、見出し構造も手で付け直すことになります。原稿をそのままREST API経由で下書き化すれば、エディタ側の調整は装飾の最後の仕上げだけで済みます。</p>
+
+  <h3>場面3：記事の定期更新・リライト運用</h3>
+  <p>既存記事の見出し構造だけ差し替える、本文末尾のCTAを一斉入れ替える、といった運用も、API経由なら数十記事を数分で処理できます。管理画面を1本ずつ開く作業は、ここでも省けます。</p>
+
+  <h2 id="s2">2. 構成の全体像と、使う技術スタック</h2>
+  <p>今回紹介する仕組みは、特殊なサーバー構成を必要としません。ローカルのPC1台と、公開済みのWordPressサイトがあれば動きます。</p>
+
+  <table>
+    <thead><tr><th>要素</th><th>採用した技術</th></tr></thead>
+    <tbody>
+      <tr><td>原稿フォーマット</td><td>Markdown（.md）</td></tr>
+      <tr><td>実行環境</td><td>PowerShell 5.1（Windows標準搭載）</td></tr>
+      <tr><td>認証方式</td><td>WordPress Application Password（Basic認証）</td></tr>
+      <tr><td>投稿API</td><td>WP REST API（<code>/wp-json/wp/v2/posts</code>）</td></tr>
+      <tr><td>変換処理</td><td>PowerShell内の正規表現ベース（追加ライブラリ不要）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>補足：</strong>PowerShell以外にも、Python・Node.js・GAS など、HTTP POSTができる言語なら同じ構成が組めます。今回はWindows環境で追加インストール不要のPowerShellを採用しました。
+  </div>
+
+  <h2 id="s3">3. 認証はApplication Passwordで統一する</h2>
+  <p>WordPressにプログラムからアクセスする方法はいくつかありますが、WordPress 5.6以降は<strong>Application Password</strong>が公式に用意されており、これを使うのが最も安全です。管理者パスワードを直接スクリプトに書く必要がなく、万が一流出した場合も、管理画面から当該のアプリケーションパスワードだけを無効化できます。</p>
+
+  <h3>発行手順</h3>
+  <ol>
+    <li>WordPress管理画面にログイン</li>
+    <li>「ユーザー」→「プロフィール」を開き、下部までスクロール</li>
+    <li>「アプリケーションパスワード」セクションで、名前（例：<code>cli-automation</code>）を入力</li>
+    <li>「新しいアプリケーションパスワードを追加」で、24桁のパスワードを発行</li>
+    <li>表示されたパスワードを控える（スペース込みでそのまま使用する）</li>
+  </ol>
+
+  <div class="note">
+    <strong>注意：</strong>Application Passwordは発行直後の画面を閉じると二度と表示されません。必ずコピーして保管してください。ソースコードに直接書かず、環境変数や外部設定ファイルに逃がすのが本番運用の作法です。
+  </div>
+
+  <h2 id="s4">4. Markdown原稿を投稿可能なHTMLに変換する</h2>
+  <p>WordPress REST APIの<code>content</code>フィールドはHTMLを受け付けます。Markdownのままでは段落と見出しが崩れるので、最低限の変換を挟みます。</p>
+
+  <h3>変換対象の最小セット</h3>
+  <ul>
+    <li><code>## 見出し</code> → <code>&lt;h2&gt;見出し&lt;/h2&gt;</code></li>
+    <li><code>### 小見出し</code> → <code>&lt;h3&gt;小見出し&lt;/h3&gt;</code></li>
+    <li><code>- リスト項目</code> → <code>&lt;ul&gt;&lt;li&gt;リスト項目&lt;/li&gt;&lt;/ul&gt;</code></li>
+    <li>空行で区切られたテキスト塊 → <code>&lt;p&gt;...&lt;/p&gt;</code></li>
+  </ul>
+
+  <p>この4パターンだけでも、ブログ記事の9割はカバーできます。表やコードブロック、強調・リンクが必要になった時点で、同じ発想で変換ルールを足していけば十分です。</p>
+
+  <h3>タイトルの扱い</h3>
+  <p>Markdownの先頭にある<code># タイトル</code>は、WordPress側のtitleフィールドに回します。本文の見出し階層とタイトルを混在させないことで、SEO上のh1重複も防げます。</p>
+
+  <h2 id="s5">5. PowerShellから REST API に POSTする実装</h2>
+  <p>認証ヘッダーの作り方と、投稿APIの呼び出し方は、次の3ステップで整理できます。</p>
+
+  <h3>ステップ1：Basic認証ヘッダーの生成</h3>
+  <pre class="code">$pair    = "${WP_USERNAME}:${WP_APP_PASS}"
+$encoded = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($pair))
+$headers = @{
+    'Authorization' = "Basic $encoded"
+    'Content-Type'  = 'application/json; charset=utf-8'
+}</pre>
+  <p>ユーザー名とApplication Passwordを<code>:</code>で結合し、Base64エンコードしてAuthorizationヘッダーに乗せるだけです。Application Passwordに含まれるスペースは、そのまま残してください（除去すると認証が通りません）。</p>
+
+  <h3>ステップ2：投稿データの組み立て</h3>
+  <pre class="code">$postData = @{
+    title   = $title
+    content = $htmlBody
+    status  = 'draft'   # 'publish' で即公開
+} | ConvertTo-Json -Depth 10</pre>
+  <p>最初は<code>draft</code>で下書きとして投稿し、管理画面で最終確認してから公開ボタンを押す運用が安全です。確認が不要な定型記事では、直接<code>publish</code>を指定します。</p>
+
+  <h3>ステップ3：POSTの実行</h3>
+  <pre class="code">$endpoint = "$WP_URL/wp-json/wp/v2/posts"
+$bytes    = [Text.Encoding]::UTF8.GetBytes($postData)
+$response = Invoke-RestMethod -Uri $endpoint -Method Post `
+                              -Headers $headers -Body $bytes
+
+Write-Host "Post ID: $($response.id)"
+Write-Host "URL: $($response.link)"</pre>
+  <p>日本語本文を正しく送るため、JSON文字列を<code>UTF-8</code>のバイト列に変換してからBodyに渡しています。<code>Invoke-RestMethod</code>は返却されたJSONを自動でオブジェクト化するので、投稿ID・URL・ステータスをそのまま変数から取り出せます。</p>
+
+  <h2 id="s6">6. 運用で押さえておきたい3つの落とし穴</h2>
+  <p>仕組みが動いた後、現場で詰まりやすいのは次の3点です。</p>
+
+  <h3>落とし穴1：認証エラーは、ほぼスペースの扱いが原因</h3>
+  <p>「401 Unauthorized」が返ってくる場合、Application Passwordからスペースを削ってしまっているケースが大半です。発行時に表示された文字列を、スペースも含めて<em>そのまま</em>貼り付けるのが正解です。</p>
+
+  <h3>落とし穴2：ユーザー名は「表示名」ではなく「ログインID」</h3>
+  <p>WordPressではニックネーム・表示名・ユーザー名が別物です。REST APIで使うのは、ログイン時に入れている<strong>ユーザー名（user_login）</strong>です。管理画面の「ユーザー」一覧で、該当アカウント行の「ユーザー名」列を確認してください。</p>
+
+  <h3>落とし穴3：いきなり「公開」で走らせない</h3>
+  <p>スクリプトのバグで、意図しない記事が公開されてしまうと戻すのに時間がかかります。実運用に乗せる前は、必ず<code>draft</code>で動作確認し、タイトル・本文・ステータス・パーマリンクを管理画面で見て、問題がなければ<code>publish</code>に切り替える。この一手間が、事故を未然に防ぎます。</p>
+
+  <div class="note">
+    <strong>拡張の余地：</strong>この基本構成の上に、アイキャッチ画像のメディアアップロード、カスタムフィールド、カテゴリ・タグの自動付与、既存記事の一括更新といった機能を少しずつ足せます。REST APIが対応する範囲なら、構造は変えずに積み上げられます。
+  </div>
+
+  <div class="disclaimer">
+    <strong>本記事の免責事項：</strong>本記事は検証環境で動作確認した一般的な実装例を解説したものであり、特定のWordPress環境・プラグイン構成での動作を保証するものではありません。本番環境への適用前には、必ずテスト環境で動作検証を行ってください。Application Passwordを含む認証情報は、ソースコードに直接記載せず、環境変数や暗号化された外部ストアで管理することを推奨します。
+  </div>
+
+  <hr>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>藤崎 律（ふじさき りつ）</strong>
+      大学時代にAI（LLM・プロンプト設計）を勉強し、現在はフリーランスライターとして独立準備中。Claude Codeベースの自作システムで、SEO記事の構成設計からWordPress入稿までの自動化環境を構築。ライター業務と技術をつなぐ領域での執筆・開発を得意とする。
+    </div>
+  </div>
+
+</article>
+</body>
+</html>
