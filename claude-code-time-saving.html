@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>副業ライターの僕が、Claude CodeでWordPress入稿を5倍速にした話｜独立準備中の時短実録 | 藤崎 律</title>
+<meta name="description" content="副業ライターが抱える「書くより貼る時間が長い」問題を、Claude Codeで作った自動入稿スクリプトで解決した体験レポート。1記事20分の入稿作業が4分に短縮された後、浮いた時間で何が変わったかを独立準備中の24歳の視点で記しました。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #2b6cb0;
+    --bg: #fdfdfb;
+    --note-bg: #f7f5ee;
+    --note-border: #d4c98a;
+    --code-bg: #f4f4ef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.9;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #1a4770;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: var(--sub);
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.85;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 15px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f2efe3;
+    font-weight: 700;
+    width: 34%;
+  }
+  .result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0 28px;
+  }
+  .result-card {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px;
+    text-align: center;
+  }
+  .result-label {
+    font-size: 13px;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .result-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .result-unit {
+    font-size: 14px;
+    color: var(--sub);
+    margin-left: 4px;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+  .disclaimer {
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    margin: 40px 0 24px;
+    font-size: 13.5px;
+    color: var(--sub);
+    line-height: 1.8;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.85; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    th, td { padding: 8px 10px; font-size: 14px; }
+    .result { grid-template-columns: 1fr; }
+    .result-number { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">AI WORKFLOW ・ 執筆：藤崎 律 ・ 想定読了時間 7分</div>
+  <h1>副業ライターの僕が、Claude CodeでWordPress入稿を5倍速にした話｜独立準備中の時短実録</h1>
+
+  <p class="lead">
+    副業ライターになって気づいたのは、「書く時間」より「貼る時間」が長い月もあるということでした。この記事は、独立準備中の24歳が、Claude Codeに相談しながら作ったWordPress自動入稿スクリプトで、1記事20分かかっていた入稿作業を4分に短縮した体験の記録です。時短そのものより、浮いた時間で何が変わったかに重心を置いて書いています。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">副業ライターの時間が、入稿に食われていく</a></li>
+      <li><a href="#s2">Claude Codeを選んだのは「自分で動かせた」から</a></li>
+      <li><a href="#s3">WP入稿で変わった3つのこと</a></li>
+      <li><a href="#s4">AI時短でも、やらないと決めた2つのこと</a></li>
+      <li><a href="#s5">読者へ：今日から1つだけ自動化する</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. 副業ライターの時間が、入稿に食われていく</h2>
+
+  <p>副業でライター業を始めてから、ある違和感がありました。「書く仕事」のはずなのに、1本仕上げるまでの作業時間のうち、本文を書いている時間よりも、仕上げの装飾や入稿に使っている時間のほうが長い週があったのです。</p>
+
+  <p>手順はこうでした。Markdown形式のメモで骨組みを書き、本文を書き足し、推敲し、WordPressの管理画面に貼り付けて、見出しをタグ化し、改行を直し、画像にaltを付け、カテゴリーとタグを設定し、プレビューで崩れを確認する。1記事あたり、入稿作業だけで約20分。</p>
+
+  <p>月に5記事書けば、入稿だけで100分。1時間半以上の時間を、頭を使わない「貼る」作業に充てていた計算です。これが週になり月になると、独立準備中の自分にとって、無視できない「静かな消耗」になっていました。</p>
+
+  <div class="note">
+    「書く」はクリエイティブな作業なのに、「貼る」はただの転記作業です。この2つが同じ案件のなかで切れ目なく続くと、頭の切り替えで疲れが残る感覚がありました。
+  </div>
+
+  <h3>この記事は、こういう人に向けて書きました</h3>
+  <p>ライティング経験は積み始めたばかりで、AIツールにも興味はあるけれど、まだ本格的に触れていない人。副業ライター、独立準備中の20代、「書くより貼るに時間を使っている違和感」がある人。1人でも当てはまる人がいればと思って書いています。</p>
+
+  <h2 id="s2">2. Claude Codeを選んだのは「自分で動かせた」から</h2>
+
+  <p>AIツールと言えばChatGPT、Gemini、Claudeあたりが候補に挙がります。この中からClaude Codeを選んだのは、「エンジニアじゃない自分でも、対話するだけで動くスクリプトが手元に残る」感覚があったからです。</p>
+
+  <p>最初にお願いしたのは、「Markdown原稿をWordPressに自動投稿するPowerShellスクリプトを作りたい」という、素人丸出しの一言でした。Claude Codeは、必要な認証方法（Application Password）、使うAPI（REST API）、Markdownを変換する処理まで、1つずつ対話形式で組み立ててくれました。</p>
+
+  <p>途中、Windows PowerShellでの文字コードの罠にハマったり、記号の扱いで動かなくなったりしましたが、エラーを貼り付けると原因と修正案が返ってくるので、1人で詰まる時間がほぼありませんでした。</p>
+
+  <div class="note">
+    派手なAI活用の記事では「AIに書かせた」の話が目立ちますが、僕にとって一番価値があったのは「AIに頼りながら、自分の手で道具を作れた」実感でした。使い終わっても、スクリプトは自分のPCに残り続けます。
+  </div>
+
+  <p>実装の詳細は、別のポートフォリオ記事（<a href="wordpress-automation.html">Markdown原稿からWordPressへ記事を一括公開する｜REST API × PowerShellの実装ガイド</a>）で解説しています。本記事では「作ったあと、何が変わったか」を主に書きます。</p>
+
+  <h2 id="s3">3. WP入稿で変わった3つのこと</h2>
+
+  <p>スクリプトができあがってから、1記事あたりの入稿時間はこう変わりました。</p>
+
+  <div class="result">
+    <div class="result-card">
+      <div class="result-label">BEFORE</div>
+      <div class="result-number">20<span class="result-unit">分 / 記事</span></div>
+    </div>
+    <div class="result-card">
+      <div class="result-label">AFTER</div>
+      <div class="result-number">4<span class="result-unit">分 / 記事</span></div>
+    </div>
+  </div>
+
+  <p>単純計算で約5倍速です。月に5記事なら、入稿時間が100分から20分へ短縮され、1時間20分が別の作業に回せる計算になります。ただ、数字より大事な変化が3つありました。</p>
+
+  <h3>変化1：単純作業からの解放</h3>
+  <p>「書く」モードと「貼る」モードの切り替えがなくなり、1本仕上げたあとの疲労感が明らかに減りました。原稿を書き終えた瞬間、コマンド1本で下書き化が終わるので、推敲に集中できます。</p>
+
+  <h3>変化2：見出し整形や記号崩れの心配がゼロに</h3>
+  <p>手作業の入稿では、h2のタグ化を忘れたり、全角括弧が半角に変換されていたりと、小さな事故が月1回は起きていました。スクリプトが同じ処理を毎回同じ精度でやってくれるので、ミス由来の再修正時間がなくなりました。</p>
+
+  <h3>変化3：執筆の推敲や、新しい案件への挑戦に時間を回せる</h3>
+  <p>一番大きかったのはこれでした。浮いた80分で、仕上がった原稿を推敲する余裕が生まれ、提案文の精度を上げる時間ができ、新しいテーマへの応募が増えました。結果として、1本あたりの単価も少しずつ上げられるようになっています。</p>
+
+  <h2 id="s4">4. AI時短でも、やらないと決めた2つのこと</h2>
+
+  <p>AIで時間が浮くとわかると、つい「もっと自動化できないか」「他のツールも試したい」と考えてしまいます。ただ、独立準備中で資金に余裕がない僕にとっては、「やらないこと」を決めるほうが大事でした。</p>
+
+  <h3>やらないこと1：AIに記事の本文を書かせる</h3>
+  <p>これは、僕のライター業そのものを壊してしまう選択です。読者が記事に求めるのは「書き手の体験と視点」だと信じているので、本文の執筆は自分の手で続けることにしました。AIは、構成の壁打ちや、タイトル案の洗い出しに使っています。</p>
+
+  <h3>やらないこと2：流行りのAIツールを全部触る</h3>
+  <p>月に新しいAIサービスが次々と出てきますが、追いかけ続けると「どれも中途半端」で終わります。僕はClaude Code 1つに絞って、できることを深掘りする運用に落ち着きました。深く触った道具のほうが、結果的に長く使えています。</p>
+
+  <div class="note">
+    「捨てる技術」は、ライティングでも生き方でも効くと感じます。やることを増やすより、やらないことを決めるほうが、結果が出るまでの距離が短くなりました。
+  </div>
+
+  <h2 id="s5">5. 読者へ：今日から1つだけ自動化する</h2>
+
+  <p>この記事を読んでくださった方で、「WordPressに月1本でも入稿している」人がいれば、Claude Codeに同じ相談をしてみる価値があります。無料枠から始められて、エンジニアでなくても動かせるからです。</p>
+
+  <p>最初の一歩は、こんなプロンプトからで十分です。</p>
+
+  <table>
+    <tr>
+      <th>目的</th>
+      <td>Markdown原稿をWordPressに下書きとして自動投稿したい</td>
+    </tr>
+    <tr>
+      <th>環境</th>
+      <td>Windows 10 + PowerShell、WordPressはApplication Password有効</td>
+    </tr>
+    <tr>
+      <th>依頼</th>
+      <td>Markdownファイルを引数に取り、REST API経由でWPに下書き投稿するスクリプトを作ってください</td>
+    </tr>
+  </table>
+
+  <p>「全部を一気に自動化する」のではなく、「自分の作業時間のうち、1番無駄に感じる1工程」を切り出すのがコツです。全部やろうとすると、どこから手を付けるかで動けなくなります。1つだけ選ぶなら、「同じ作業を繰り返している」ところから。</p>
+
+  <h2>おわりに：時短は目的ではなく、取り戻した時間で何をするか</h2>
+
+  <p>「時短」の数字だけを追うと、ゴールが見えなくなります。本当に大事なのは、浮いた時間を何に使うかです。</p>
+
+  <p>僕の場合は、推敲に時間を回したこと、新しいテーマに挑戦できたこと、そして、ライティングそのものへの集中を取り戻せたことが、記事単価を上げたりポートフォリオを育てたりする好循環につながりました。独立準備というゴールに向けて、確実に距離を縮められている実感があります。</p>
+
+  <p>Claude Codeは、僕にとっての「貼る作業からの解放装置」でした。あなたにとっての「静かな消耗」も、きっと1つあるはずです。それを1つだけ、相談してみる。そこから始まる変化は、思っているより大きいかもしれません。</p>
+
+  <div class="disclaimer">
+    本記事は、2026年10月時点での筆者個人の運用実例に基づく体験レポートです。数字（1記事20分→4分）はローカルWordPress環境（Local by Flywheel）で実測した値で、環境や運用方法によって変動します。業務導入時は、必ずテスト環境での検証と、クライアントとの事前合意のうえでご判断ください。
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>藤崎 律（フジサキ リツ）</strong>
+      24歳フリーランスライター（独立準備中）。副業ライター業・WEBサイト運営・AI活用スクリプト開発を並行。大学時代に触れたAIに興味を持ち、独学で勉強を続け、現在はClaude Codeを中心に実務でAIを活用中。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
