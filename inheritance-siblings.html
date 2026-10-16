@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>親の家、兄弟でどう分ける？もめない相続3つの型｜地方の司法書士が解説 | 藤崎 律</title>
+<meta name="description" content="親から相続する家の分け方で、兄弟仲を壊さないための3つの型を、地方の司法書士の監修方針に沿って整理しました。換価分割・代償分割・共有分割の違いと、わが家に合う型の見分け方をわかりやすく解説します。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #4a7857;
+    --bg: #fdfdfb;
+    --note-bg: #f0f4ec;
+    --note-border: #a5bd99;
+    --brief-bg: #f3f6fb;
+    --brief-border: #6b8ab8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+
+  /* ==== ポートフォリオ用：想定クライアントブリーフ ==== */
+  .portfolio-brief {
+    background: var(--brief-bg);
+    border: 1px dashed var(--brief-border);
+    border-radius: 2px;
+    padding: 22px 26px;
+    margin-bottom: 40px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #2a4068;
+  }
+  .portfolio-brief .brief-label {
+    display: inline-block;
+    background: var(--brief-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .portfolio-brief h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #1a3b6b;
+    font-weight: 700;
+  }
+  .portfolio-brief table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .portfolio-brief th, .portfolio-brief td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #d8e1ef;
+    text-align: left;
+    vertical-align: top;
+  }
+  .portfolio-brief th {
+    width: 32%;
+    color: #4a6490;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .portfolio-brief .brief-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #4a6490;
+    font-style: italic;
+  }
+  /* ==== /ブリーフここまで ==== */
+
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 27px;
+    line-height: 1.55;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 21px;
+    line-height: 1.55;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #2f5a3b;
+    font-weight: 700;
+  }
+  p { margin: 0 0 16px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 15px;
+  }
+  table.data th, table.data td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.data th {
+    background: #e6ede4;
+    font-weight: 700;
+    width: 34%;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .term {
+    color: var(--sub);
+    font-size: 13px;
+  }
+  .disclaimer {
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    margin: 40px 0 24px;
+    font-size: 13.5px;
+    color: var(--sub);
+    line-height: 1.85;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .sources {
+    font-size: 13px;
+    color: var(--sub);
+    line-height: 1.9;
+  }
+  .sources li { margin-bottom: 6px; }
+  .sources a { color: var(--accent); word-break: break-all; }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8d1b8, #8ba897);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 21px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.data th, table.data td { padding: 8px 10px; font-size: 14px; }
+    .portfolio-brief { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+
+  <!-- ===== ポートフォリオ用：想定クライアント・レギュレーション ===== -->
+  <div class="portfolio-brief">
+    <span class="brief-label">PORTFOLIO SAMPLE / CLIENT BRIEF</span>
+    <h3>この記事は、以下の架空クライアントの依頼を想定して執筆したサンプルです</h3>
+    <table>
+      <tr><th>想定クライアント</th><td>南風（みなみかぜ）司法書士事務所（架空の地方司法書士事務所）</td></tr>
+      <tr><th>事務所方針</th><td>「兄弟仲を壊さない相続」。親子・兄弟関係の継続を最優先に、相続手続きを粘り強く伴走するスタイル</td></tr>
+      <tr><th>想定読者</th><td>40〜60代の相続を控えた兄弟姉妹／親の家の処分で揉めるのが怖い／士業に相談するハードルを感じている層</td></tr>
+      <tr><th>記事の目的</th><td>相談前の不安を和らげ、事務所の「もめない相続」志向を事前に伝える</td></tr>
+      <tr><th>執筆レギュレーション</th><td>です・ます調／1文は40字以内／法律用語には必ずカッコで注釈／見出しは問いかけ調／結論を見出しで断定しない</td></tr>
+      <tr><th>禁止表現</th><td>「絶対」「必ず」「〇〇だけで解決」の断定／特定の分け方の推奨断定／他の司法書士・弁護士事務所の批判／弁護士法72条に抵触する表現（争訟代理の勧誘等）／相続税の個別アドバイス（税理士業務に当たるため）</td></tr>
+      <tr><th>CTA</th><td>記事末尾：初回60分の無料相続相談への申し込みを促す、不安をあおらないトーン</td></tr>
+    </table>
+    <div class="brief-note">※ 本記事は藤崎律のポートフォリオサンプルです。南風司法書士事務所は実在せず、本文中のコメントは架空です。制度の内容は実在の法令・公的資料に基づいて記載しています。</div>
+  </div>
+  <!-- ===== /ブリーフここまで ===== -->
+
+  <div class="meta">相続・家の分け方の3つの型と、兄弟関係の守り方 ・ 執筆：藤崎 律</div>
+  <h1>親の家、兄弟でどう分ける？もめない相続3つの型｜地方の司法書士が解説</h1>
+
+  <p class="lead">
+    親が亡くなった後、相続<span class="term">（亡くなった方の財産を、残された家族が引き継ぐこと）</span>で一番ややこしくなりがちなのが、実家の分け方です。「家は売るのか」「誰かが継ぐのか」「それとも共有するのか」。この記事では、兄弟仲を壊さないための3つの分け方の型と、「わが家」に合う型の見分け方を整理していきます。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">相続って、本当は「お金」より「兄弟仲」の話なんです</a></li>
+      <li><a href="#s2">親の家、兄弟で分けるってどういうこと？</a></li>
+      <li><a href="#s3">相続でもめる3つの共通パターン</a></li>
+      <li><a href="#s4">もめない相続「3つの型」を知っておきましょう</a></li>
+      <li><a href="#s5">どの型が「わが家」に合うか、見分ける3つの視点</a></li>
+      <li><a href="#s6">遺言書があるかどうかで、話はこう変わります</a></li>
+      <li><a href="#s7">「兄弟の仲が良いうちに」話し合うコツ</a></li>
+      <li><a href="#s8">まとめ：相続は、手続きではなく、関係の話</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. 相続って、本当は「お金」より「兄弟仲」の話なんです</h2>
+  <p>相続のご相談でいらっしゃる方の多くが、こうおっしゃいます。</p>
+  <p>「お金のことで、兄と気まずくなりたくない」。</p>
+  <p>「親の家をどうするかで、妹とちゃんと話せる自信がない」。</p>
+  <p>「法律のことがわからないから、相手の言うことを受け入れるしかない気がする」。</p>
+  <p>相続の現場では、金額の大きさよりも、「兄弟の気持ちのすれ違い」のほうが問題を長引かせます。</p>
+  <p>司法書士<span class="term">（登記や相続手続きを扱う法律の専門家）</span>としてお手伝いしている中で、「少しだけ事前に知っておけば、こうならなかったのに」という場面に何度も出会ってきました。</p>
+  <p>この記事では、「わが家の場合は、どう進めるのが落ち着くか」を考えるための地図をお届けします。</p>
+
+  <h2 id="s2">2. 親の家、兄弟で分けるってどういうこと？</h2>
+  <p>親御さんが亡くなり、残された財産の中に「家」があるとします。</p>
+  <p>この家を、兄弟姉妹でどう分けるかには、大きく3つの選択肢があります。</p>
+
+  <h3>分け方の3つの選択肢</h3>
+  <table class="data">
+    <tr><th>①売って分ける</th><td>家を売却し、売れたお金を兄弟で分ける方法</td></tr>
+    <tr><th>②誰かが継ぐ</th><td>一人が家を相続し、他の兄弟には別の財産や代わりのお金を渡す方法</td></tr>
+    <tr><th>③共有で持つ</th><td>兄弟全員で家を共有名義にする方法</td></tr>
+  </table>
+
+  <p>法律の言葉では、それぞれ「換価分割<span class="term">（かんかぶんかつ）</span>」「代償分割<span class="term">（だいしょうぶんかつ）</span>」「共有分割<span class="term">（きょうゆうぶんかつ）</span>」と呼ばれます。</p>
+  <p>名前は難しそうですが、やっていることは「売る・継ぐ・みんなで持つ」のどれかです。</p>
+
+  <h2 id="s3">3. 相続でもめる3つの共通パターン</h2>
+  <p>これまでご相談を受けた中で、兄弟関係がこじれやすい共通パターンが3つあります。</p>
+
+  <h3>パターン1：家の価値を、兄弟で違う金額で見ている</h3>
+  <p>兄は「古いし売れても1,000万円」と思い、妹は「立地がいいから2,000万円は堅い」と思っている。</p>
+  <p>この時点で、話が噛み合わなくなります。</p>
+  <p>先に「不動産会社から簡単な査定を取る」だけで、感情のぶつかりが半分くらい減ります。</p>
+
+  <h3>パターン2：家を継いだ人が、他の兄弟に何を渡すか決まっていない</h3>
+  <p>「兄が継ぐ」ことには同意しても、「じゃあ妹には何を？」が曖昧なまま。</p>
+  <p>時間が経つと「あの時、話が違った」になります。</p>
+
+  <h3>パターン3：共有名義で終わらせて、将来誰かが困る</h3>
+  <p>兄弟3人で共有名義にすると、「売る時に3人全員の同意が必要」になります。</p>
+  <p>10年、20年経つと、意見の違いや、兄弟の配偶者が加わって話が進まなくなるケースが出てきます。</p>
+
+  <div class="note">
+    <strong>ポイント：</strong>相続は、分けた瞬間ではなく、分けた10年後20年後の家族関係も見据えて選ぶのがコツです。「今、一番ラクな方法」が、未来の負担につながることがあります。
+  </div>
+
+  <h2 id="s4">4. もめない相続「3つの型」を知っておきましょう</h2>
+  <p>では、3つの分け方それぞれの特徴を、整理していきます。</p>
+
+  <h3>型①：換価分割（売って、現金で分ける）</h3>
+  <p>家を売却し、売れたお金を法定相続分<span class="term">（民法で決まった兄弟それぞれの取り分の割合）</span>で分ける方法です。</p>
+  <p>兄弟それぞれが家を欲しがらない場合に、公平性が高くなります。</p>
+  <p>気を付けたいのは、売却に時間がかかる点と、売却費用（仲介手数料・登記費用など）が差し引かれる点です。</p>
+
+  <h3>型②：代償分割（一人が継ぎ、他に代わりのお金を渡す）</h3>
+  <p>誰か一人が家を相続し、他の兄弟には「あなたの取り分に相当するお金」を代わりに渡す方法です。</p>
+  <p>親の家を継ぎたい人がいる場合に、関係を壊さず解決できる型として選ばれます。</p>
+  <p>気を付けたいのは、継ぐ人に「代わりのお金を払う現金」が必要になる点です。</p>
+
+  <h3>型③：共有分割（兄弟全員で持つ）</h3>
+  <p>兄弟全員で家を共有名義にする方法です。</p>
+  <p>「今すぐ結論を出さなくていい」というメリットはありますが、将来に問題を先送りすることにもなります。</p>
+  <p>共有名義の家は、売却するにも貸し出すにも、全員の同意が必要になります。</p>
+  <p>一時的な選択肢として捉えるのが、現場での感覚です。</p>
+
+  <div class="note">
+    <strong>ポイント：</strong>どの型も、それ自体に良い悪いはありません。「わが家の家族構成・資金状況・将来の暮らし方」に合うかどうかで選びます。
+  </div>
+
+  <h2 id="s5">5. どの型が「わが家」に合うか、見分ける3つの視点</h2>
+  <p>型を選ぶときに、持っておきたい視点が3つあります。</p>
+
+  <h3>視点1：家に住み続けたい人がいるか</h3>
+  <p>「親の家を継いで、自分が住みたい」と考える兄弟がいる場合、型②（代償分割）が自然な選択肢になります。</p>
+  <p>いない場合は、型①（換価分割）がシンプルです。</p>
+
+  <h3>視点2：家を継ぐ人に、代わりのお金を払える余裕があるか</h3>
+  <p>型②を選ぶには、継ぐ人がまとまったお金を用意できる必要があります。</p>
+  <p>難しい場合は、型①を検討するか、分割払いの合意を書面に残しておくことが大事です。</p>
+
+  <h3>視点3：兄弟の家族（配偶者・子ども）の意向をどう扱うか</h3>
+  <p>長い目で見ると、兄弟の配偶者や子どもも関わってきます。</p>
+  <p>特に型③（共有分割）は、兄弟の次の世代にまで引き継がれる可能性があります。</p>
+  <p>「数十年後、どうなっているか」の視点を持っておきましょう。</p>
+
+  <h2 id="s6">6. 遺言書があるかどうかで、話はこう変わります</h2>
+  <p>親御さんが遺言書<span class="term">（亡くなった方が、生前に自分の意思で財産の分け方を書き残した書面）</span>を残していた場合、話し合いの出発点が変わります。</p>
+  <p>遺言書があれば、原則としてその内容に沿って手続きを進めます。</p>
+  <p>遺言書がない場合は、兄弟全員での話し合い（遺産分割協議<span class="term">（いさんぶんかつきょうぎ）</span>）で分け方を決めることになります。</p>
+  <p>どちらにしても、全員の署名と押印が必要になる場面があります。</p>
+  <p>連絡が取りにくい兄弟がいる場合は、早めに所在を確認しておくと、手続きが止まらずに済みます。</p>
+
+  <h2 id="s7">7. 「兄弟の仲が良いうちに」話し合うコツ</h2>
+  <p>相続の話は、親御さんがお元気なうちに始めるのが、理想です。</p>
+  <p>もしまだ切り出せていなければ、こんな入り口から始めてみてください。</p>
+
+  <h3>話し合いの、やわらかい入り口3つ</h3>
+  <ol>
+    <li>「万が一のときの話、少しだけしておきたい」と前置きする</li>
+    <li>「あなたは、親の家をどうしたい？」と希望を先に聞く</li>
+    <li>結論を出さず、「今日は意見を交換するだけ」で終わらせる</li>
+  </ol>
+
+  <p>一度で全てを決めようとせず、小さな会話を何回かに分けるのがコツです。</p>
+  <p>一度に全てを話そうとすると、どうしても言葉が強くなりがちです。</p>
+
+  <div class="note">
+    <strong>ポイント：</strong>相続の話し合いは、ゴールを決めるためではなく、「お互いの気持ちを知るため」に始めると、関係が壊れにくくなります。
+  </div>
+
+  <h2 id="s8">8. まとめ：相続は、手続きではなく、関係の話</h2>
+  <p>親の家をどう分けるかには、換価分割・代償分割・共有分割の3つの型があります。</p>
+  <p>どの型を選ぶかは、わが家の家族構成・資金状況・将来の暮らし方で決まります。</p>
+  <p>一番大切なのは、「兄弟仲が壊れない形」を優先することです。</p>
+  <p>「法律的にはこうです」の正解よりも、「家族として納得できる形」のほうが、長い目で見て関係を守ってくれます。</p>
+  <p>当事務所では、「兄弟全員が同じテーブルに座れる状態」をつくるところからお手伝いしています。</p>
+  <p>初回60分の無料相続相談を行っておりますので、「切り出し方からわからない」という段階でも、どうぞお気軽にご相談ください。</p>
+
+  <div class="disclaimer">
+    <strong>本記事の免責事項：</strong>記載している制度・分け方は、公開時点の情報に基づく一般的な解説です。相続は個別の家族関係・財産状況によって最適な進め方が異なります。実際にご検討の際は、必ず司法書士や弁護士などの専門家にご相談のうえ、ご判断ください。相続税の個別のご相談は、税理士の業務になります。
+  </div>
+
+  <hr>
+
+  <h3 style="color: var(--sub); font-size: 14px; margin: 32px 0 16px;">参考資料</h3>
+  <ol class="sources">
+    <li>※1 民法第898条・第900条（共同相続・法定相続分）<a href="https://elaws.e-gov.go.jp/document?lawid=129AC0000000089" target="_blank" rel="noopener">https://elaws.e-gov.go.jp/</a></li>
+    <li>※2 法務省「相続登記の申請義務化（2024年4月1日施行）について」<a href="https://www.moj.go.jp/MINJI/minji05_00343.html" target="_blank" rel="noopener">https://www.moj.go.jp/</a></li>
+    <li>※3 日本司法書士会連合会「相続・遺言について」<a href="https://www.shiho-shoshi.or.jp/activity/hourei/post_14.html" target="_blank" rel="noopener">https://www.shiho-shoshi.or.jp/</a></li>
+    <li>※4 国税庁「相続税のあらまし」<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4102.htm" target="_blank" rel="noopener">https://www.nta.go.jp/</a>（基礎控除の計算等）</li>
+  </ol>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
