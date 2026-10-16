@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>子どものアトピー、ステロイドって本当に大丈夫？小児皮膚科医が答える、薬との付き合い方 | 藤崎 律</title>
+<meta name="description" content="子どものアトピーでステロイドを使うことに不安を感じている保護者の方へ。小児皮膚科専門医の監修方針に沿って、薬との付き合い方と日々のスキンケアを分かりやすく解説します。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #c45a7e;
+    --bg: #fdfdfb;
+    --note-bg: #fdf5f3;
+    --note-border: #e8b4b8;
+    --brief-bg: #f3f6fb;
+    --brief-border: #6b8ab8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+
+  /* ==== ポートフォリオ用：想定クライアントブリーフ ==== */
+  .portfolio-brief {
+    background: var(--brief-bg);
+    border: 1px dashed var(--brief-border);
+    border-radius: 2px;
+    padding: 22px 26px;
+    margin-bottom: 40px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #2a4068;
+  }
+  .portfolio-brief .brief-label {
+    display: inline-block;
+    background: var(--brief-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .portfolio-brief h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #1a3b6b;
+    font-weight: 700;
+  }
+  .portfolio-brief table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .portfolio-brief th, .portfolio-brief td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #d8e1ef;
+    text-align: left;
+    vertical-align: top;
+  }
+  .portfolio-brief th {
+    width: 32%;
+    color: #4a6490;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .portfolio-brief .brief-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #4a6490;
+    font-style: italic;
+  }
+  /* ==== /ブリーフここまで ==== */
+
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 27px;
+    line-height: 1.55;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 21px;
+    line-height: 1.55;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #933a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 16px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  table.ftu {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 15px;
+  }
+  table.ftu th, table.ftu td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.ftu th {
+    background: #faeef1;
+    font-weight: 700;
+    width: 34%;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .word {
+    color: #933a5a;
+    font-weight: 600;
+  }
+  .term {
+    color: var(--sub);
+    font-size: 13px;
+  }
+  .disclaimer {
+    background: #f5f5f5;
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    margin: 40px 0 24px;
+    font-size: 13.5px;
+    color: var(--sub);
+    line-height: 1.85;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .sources {
+    font-size: 13px;
+    color: var(--sub);
+    line-height: 1.9;
+  }
+  .sources li { margin-bottom: 6px; }
+  .sources a { color: var(--accent); word-break: break-all; }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #d6b8c4, #c78ba3);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 21px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.ftu th, table.ftu td { padding: 8px 10px; font-size: 14px; }
+    .portfolio-brief { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+
+  <!-- ===== ポートフォリオ用：想定クライアント・レギュレーション ===== -->
+  <div class="portfolio-brief">
+    <span class="brief-label">PORTFOLIO SAMPLE / CLIENT BRIEF</span>
+    <h3>この記事は、以下の架空クライアントの依頼を想定して執筆したサンプルです</h3>
+    <table>
+      <tr><th>想定クライアント</th><td>虹いろキッズ皮膚科（架空の小児皮膚科クリニック）</td></tr>
+      <tr><th>診療方針</th><td>薬に頼りすぎない、生活指導と保湿を軸にした小児アトピー治療</td></tr>
+      <tr><th>想定読者</th><td>3〜8歳のアトピー性皮膚炎のお子さんを持つ母親／ステロイド外用薬への不安あり／SNSの情報で揺れている層</td></tr>
+      <tr><th>記事の目的</th><td>初診前の不安を和らげ、院長の治療方針を事前に伝える</td></tr>
+      <tr><th>執筆レギュレーション</th><td>です・ます調／1文は40字以内／医療専門用語には必ずカッコで注釈／見出しは語りかけ調／結論を見出しで断定しない</td></tr>
+      <tr><th>禁止表現</th><td>「完治」「必ず治る」「副作用はない」「他院では」「絶対」「〇〇だけで治る」など、効果の断定・他院批判・薬機法に抵触する表現</td></tr>
+      <tr><th>CTA</th><td>記事末尾：院長への診療相談を促す、受診のハードルを上げないトーン</td></tr>
+    </table>
+    <div class="brief-note">※ 本記事は藤崎律のポートフォリオサンプルです。虹いろキッズ皮膚科は実在せず、本文中の院長・医師コメントは架空です。医学情報は実在のガイドラインに基づいて記載しています。</div>
+  </div>
+  <!-- ===== /ブリーフここまで ===== -->
+
+  <div class="meta">小児アトピー・ステロイド外用薬の付き合い方 ・ 執筆：藤崎 律</div>
+  <h1>子どものアトピー、ステロイドって本当に大丈夫？小児皮膚科医が答える、薬との付き合い方</h1>
+
+  <p class="lead">
+    お子さんのアトピー性皮膚炎<span class="term">（皮膚のバリア機能が弱く、かゆみと湿疹を繰り返す病気）</span>で、ステロイドの塗り薬を処方されて不安になっていませんか。「できれば薬を使いたくない」と感じるのは、お子さんを思うからこその気持ちです。この記事では、薬との付き合い方を落ち着いて整理していきます。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">「ステロイドは怖い」と感じるのは、なぜ？</a></li>
+      <li><a href="#s2">ステロイドは、お肌の中で何をしているの？</a></li>
+      <li><a href="#s3">強さと使う期間は、お医者さんと一緒に決めるもの</a></li>
+      <li><a href="#s4">塗り方のコツ：FTUという、量のものさし</a></li>
+      <li><a href="#s5">薬を塗らない日の、おうちでできること</a></li>
+      <li><a href="#s6">「薬をやめたい」の、安全な進め方</a></li>
+      <li><a href="#s7">診察室では、どんなことを話せばいいの？</a></li>
+      <li><a href="#s8">まとめ：不安を、一人で抱え込まないでください</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. 「ステロイドは怖い」と感じるのは、なぜ？</h2>
+  <p>保護者の方からは、こんな声をよくいただきます。</p>
+  <p>「ネットで調べたら、副作用の話がたくさん出てきた」。</p>
+  <p>「一度使うと、やめられなくなると聞いた」。</p>
+  <p>「子どもの体に、強い薬を使うのが怖い」。</p>
+  <p>どれも、お子さんを思う気持ちから出てくる、自然な不安です。</p>
+  <p>日本皮膚科学会は、こうした誤解が広がった背景として、1990年代の報道の影響を挙げています<sup>※1</sup>。</p>
+  <p>当時の情報が、形を変えてSNSに残り続けているのが現状です。</p>
+  <p>まずは、落ち着いて事実を一つずつ確かめていきましょう。</p>
+
+  <h2 id="s2">2. ステロイドは、お肌の中で何をしているの？</h2>
+  <p>ステロイド外用薬<span class="term">（皮膚に塗るタイプのステロイド薬）</span>は、お肌の炎症を抑える薬です。</p>
+  <p>アトピー性皮膚炎のかゆみは、お肌の中で炎症<span class="term">（身体の免疫が過剰に反応して赤く腫れる状態）</span>が起きているサインです。</p>
+  <p>炎症を放っておくと、お子さんがかいてしまい、傷が増えます。</p>
+  <p>傷が増えると、そこからさらに炎症が広がる悪循環に入ってしまいます。</p>
+  <p>ステロイドの役割は、この悪循環を断ち切ることです。</p>
+  <p>日本皮膚科学会のアトピー性皮膚炎診療ガイドライン2021では、ステロイド外用薬を「炎症を抑える基本的な治療薬」と位置づけています<sup>※1</sup>。</p>
+
+  <div class="note">
+    <strong>ポイント：</strong>ステロイドは、炎症を一度しっかり抑えることで、かきこわしを防ぎ、お肌の回復を助ける薬です。「体を強くする薬」でも「体に合わない薬」でもなく、「炎症を抑える役割の薬」と考えると分かりやすくなります。
+  </div>
+
+  <h2 id="s3">3. 強さと使う期間は、お医者さんと一緒に決めるもの</h2>
+  <p>ステロイド外用薬には、強さのランクがあります。</p>
+  <p>日本では、強さは5段階に分けられています<sup>※1</sup>。</p>
+
+  <h3>5段階のランク（強い順）</h3>
+  <ol>
+    <li>ストロンゲスト</li>
+    <li>ベリーストロング</li>
+    <li>ストロング</li>
+    <li>ミディアム</li>
+    <li>ウィーク</li>
+  </ol>
+  <p>お子さんに使われるのは、多くの場合ミディアムやウィークのものです。</p>
+  <p>部位によっても、使い分けがあります。</p>
+  <p>皮膚が薄い顔やまぶたには、弱めのものが選ばれます。</p>
+  <p>手足や体の湿疹には、少し強めのものが選ばれることもあります。</p>
+  <p>当院では、お子さんの肌の状態と部位をみて、必要最小限の強さを選ぶようにしています。</p>
+  <p>「強い薬を長く塗り続ける」ことは、基本的にはしません。</p>
+
+  <h2 id="s4">4. 塗り方のコツ：FTUという、量のものさし</h2>
+  <p>「どのくらい塗ればいいの？」というご質問も、とても多くいただきます。</p>
+  <p>目安になるのが、FTU<span class="term">（Finger Tip Unit／フィンガーチップユニット）</span>という考え方です。</p>
+  <p>大人の人差し指の、第一関節までチューブから出した量を1FTUといいます<sup>※2</sup>。</p>
+  <p>この1FTUで、大人の手のひら2枚ぶんの範囲に塗ることができます。</p>
+
+  <table class="ftu">
+    <thead><tr><th>塗る部位（大人の場合）</th><th>目安の量</th></tr></thead>
+    <tbody>
+      <tr><td>顔・首</td><td>約2.5FTU</td></tr>
+      <tr><td>片腕</td><td>約3FTU</td></tr>
+      <tr><td>片脚</td><td>約6FTU</td></tr>
+      <tr><td>胸・お腹</td><td>約7FTU</td></tr>
+      <tr><td>背中・お尻</td><td>約7FTU</td></tr>
+    </tbody>
+  </table>
+
+  <p>お子さんの場合は、年齢と体格に合わせて量を調整します。</p>
+  <p>大切なのは、「少なすぎず、こすらず、やさしく広げる」ことです。</p>
+  <p>少なすぎると、炎症が十分に抑えられず、治りが遅れてしまいます。</p>
+  <p>強くこすると、お子さんのお肌への刺激になります。</p>
+  <p>チューブからそっと出して、点々と置き、手のひらで広げるのがコツです。</p>
+
+  <h2 id="s5">5. 薬を塗らない日の、おうちでできること</h2>
+  <p>当院では、「薬だけで治す」という考え方はとっていません。</p>
+  <p>日々のスキンケアと生活指導を、治療の柱と考えています。</p>
+
+  <h3>保湿は、治療の一部です</h3>
+  <p>お風呂上がりの5分以内に、保湿剤をたっぷり塗ってください。</p>
+  <p>この「お風呂上がりすぐ」のタイミングが、一番大切です<sup>※1</sup>。</p>
+  <p>保湿剤は、ヒルドイド<span class="term">（ヘパリン類似物質を含む保湿剤）</span>やワセリンなど、お肌に合うものを診察時にご相談ください。</p>
+
+  <h3>かゆくなる場面を、見つけていきましょう</h3>
+  <p>汗をかいたあと、入浴後、就寝前。</p>
+  <p>かゆみが強くなる時間帯には、お子さんそれぞれのパターンがあります。</p>
+  <p>診察の際に、「どんなときにかゆがるか」を教えてください。</p>
+  <p>そこに、治療のヒントがあることが多いのです。</p>
+
+  <h3>衣類と室温の工夫</h3>
+  <p>綿素材のやわらかい服を選び、汗をかいたら着替えさせてあげてください。</p>
+  <p>室温は、お子さんが汗ばまない程度に保つのが目安です。</p>
+
+  <h2 id="s6">6. 「薬をやめたい」の、安全な進め方</h2>
+  <p>炎症がおさまってきたら、次の段階に進みます。</p>
+  <p>この段階で検討するのが、プロアクティブ療法という考え方です<sup>※1</sup>。</p>
+  <p>プロアクティブ療法は、湿疹が落ち着いたあとも、少しずつ薬の間隔をあけていく方法です。</p>
+  <p>最初は毎日塗っていた薬を、週に2〜3回に減らしていきます。</p>
+  <p>さらに安定すれば、週に1回、月に数回へと間隔を広げていきます。</p>
+  <p>いきなり中止するよりも、ぶり返しを防ぎやすい方法です。</p>
+  <p>ただし、進め方はお子さんごとに違います。</p>
+  <p>自己判断で急にやめず、診察の際に一緒に計画を立てていきましょう。</p>
+
+  <div class="note">
+    <strong>気をつけていただきたいこと：</strong>ネットの情報を見て、処方された薬を自己判断で中止すると、炎症がぶり返し、より強い治療が必要になることがあります。「薬をやめたい」と感じたときこそ、やめる前に一度ご相談ください。
+  </div>
+
+  <h2 id="s7">7. 診察室では、どんなことを話せばいいの？</h2>
+  <p>診察時間を、ぜひ有効に使ってください。</p>
+  <p>次の3つを準備いただけると、より丁寧なご相談ができます。</p>
+
+  <h3>準備1：いまの様子を記録したスマホの写真</h3>
+  <p>受診日には、たまたま症状が落ち着いていることがあります。</p>
+  <p>悪化した時の写真を撮っておくと、状態を正確に把握できます。</p>
+
+  <h3>準備2：使っている保湿剤と薬を全部お持ちください</h3>
+  <p>名前だけでなく、実物を見せていただくと的確にお話しできます。</p>
+  <p>市販のものも、ためらわずお持ちください。</p>
+
+  <h3>準備3：気になっていることを、箇条書きのメモに</h3>
+  <p>診察室では、聞きたいことが飛んでしまいがちです。</p>
+  <p>「副作用のこと」「お風呂のこと」「保育園での対応」。</p>
+  <p>どんな小さなことでも、メモに書いて持ってきてください。</p>
+
+  <h2 id="s8">8. まとめ：不安を、一人で抱え込まないでください</h2>
+  <p>ステロイド外用薬は、正しい使い方を一緒に考えていけば、お子さんのお肌を守る心強い味方になります。</p>
+  <p>大切なのは、「怖いから使わない」でも「言われるまま使い続ける」でもない、医師と一緒に進めるという姿勢です。</p>
+  <p>この記事を読んで、「もう少し詳しく聞きたい」と感じたら、どうぞ外来でご相談ください。</p>
+  <p>短い診察時間でも、話せることはたくさんあります。</p>
+  <p>お子さんの笑顔を守るために、できることを一緒に考えていきましょう。</p>
+
+  <div class="disclaimer">
+    <strong>本記事の免責事項：</strong>本記事は一般的な情報提供を目的としており、個別の診断や治療方針を保証するものではありません。症状や治療方針は一人ひとり異なります。お子さんの症状でご不安な点がある場合は、必ず皮膚科または小児科を受診してください。
+  </div>
+
+  <hr>
+
+  <h3 style="color:var(--sub); font-size:14px; letter-spacing:0.06em; margin-top:0;">出典</h3>
+  <ol class="sources">
+    <li>※1 日本皮膚科学会「アトピー性皮膚炎診療ガイドライン2021」<br><a href="https://www.dermatol.or.jp/uploads/uploads/files/guideline/atopic_GL2021.pdf" target="_blank" rel="noopener">https://www.dermatol.or.jp/uploads/uploads/files/guideline/atopic_GL2021.pdf</a></li>
+    <li>※2 厚生労働省「アトピー性皮膚炎の正しい治療のために」<br><a href="https://www.mhlw.go.jp/" target="_blank" rel="noopener">https://www.mhlw.go.jp/</a>（アトピー性皮膚炎 患者向けリーフレット）</li>
+  </ol>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      自身もアトピー性皮膚炎を抱え、月1回の皮膚科通院を続けるライター。医療・美容・法律などYMYL領域で、クライアントの診療方針や事務所の理念を事前にヒアリングし、AIを活用した執筆支援環境で「貴院の言葉で、貴院の読者に届く記事」を再現する納品スタイルを特徴とする。本記事は、架空の小児皮膚科クリニックの監修を想定したポートフォリオサンプルです。
+    </div>
+  </div>
+
+</article>
+</body>
+</html>
