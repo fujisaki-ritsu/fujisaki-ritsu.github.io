@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>クライアントの理念を、記事に落とすまで｜ヒアリングから擦り合わせまでの5ステップ | 藤崎 律</title>
+<meta name="description" content="同じAIを使っても、記事の質に差が出るのはなぜか。藤崎律が実際に行っている「書く前のヒアリング→AIプロンプト設計→初稿→擦り合わせ」の5ステップを公開します。「案件のレギュを完全再現する」とはどういうことかを、具体例つきで解説します。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --step-bg: #f5f7f9;
+    --step-border: #5a6a7a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #3a4a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  /* ステップボックス */
+  .step {
+    background: var(--step-bg);
+    border-left: 4px solid var(--step-border);
+    padding: 22px 26px;
+    margin: 32px 0;
+  }
+  .step-label {
+    display: inline-block;
+    background: var(--step-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .step h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    color: #2a3a4a;
+  }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 14.5px;
+  }
+  table.compare th, table.compare td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th {
+    background: #e7ecf1;
+    font-weight: 700;
+    width: 42%;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .samples {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 32px 0 24px;
+    font-size: 14.5px;
+  }
+  .samples h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .samples ul { margin: 0; padding-left: 20px; }
+  .samples li { padding: 4px 0; }
+  .samples a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  .samples a:hover { text-decoration: underline; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.compare th, table.compare td { padding: 8px 10px; font-size: 13.5px; }
+    .step { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">WORK PROCESS ・ 執筆：藤崎 律 ・ 想定読了時間 7分</div>
+  <h1>クライアントの理念を、記事に落とすまで｜ヒアリングから擦り合わせまでの5ステップ</h1>
+
+  <p class="lead">
+    「AIで書くライター」はこの1年で一気に増えました。ただ、同じAIを使っても、納品物の質には差が出ます。差の正体は「書く前にどれだけクライアントを理解したか」です。この記事では、藤崎律が実際に行っている、ヒアリングからクライアントとの擦り合わせまでの5ステップを、具体例つきで公開します。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">なぜ「書く前」が、記事の質を決めるのか</a></li>
+      <li><a href="#s2">【ステップ1】ヒアリング｜5つの質問で、理念を言語化する</a></li>
+      <li><a href="#s3">【ステップ2】AIプロンプト設計｜ヒアリングを"再利用できる形"にする</a></li>
+      <li><a href="#s4">【ステップ3】初稿作成｜レギュを守りながら、具体に落とす</a></li>
+      <li><a href="#s5">【ステップ4】人の目でのチェック｜AIが絶対書けない部分を補う</a></li>
+      <li><a href="#s6">【ステップ5】擦り合わせ｜初稿で完璧を目指さない</a></li>
+      <li><a href="#s7">まとめ：AIで書くのではなく、AIに「クライアントを学ばせる」</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. なぜ「書く前」が、記事の質を決めるのか</h2>
+  <p>AIに「〇〇について3,000字で書いて」と頼むと、1分で記事が出てきます。</p>
+  <p>でも、その記事を納品すると、ほとんどの場合こう返ってきます。</p>
+  <p>「うちの雰囲気と、ちょっと違うんですよね」。</p>
+  <p>この違和感の正体は、AIが「平均的な記事」を書いてしまうからです。平均は、どのメディアにも合わない形で出てきます。</p>
+
+  <h3>人力ライターが時間をかけているのは、ここ</h3>
+  <p>経験のあるライターは、受注後にまず「クライアントの過去記事を5〜10本読み込む」時間を取っています。</p>
+  <p>文体のクセ、よく使う言葉、避けている表現、見出しのトーン、CTAの温度感を、ひとつずつ拾っていきます。</p>
+  <p>この「読み込み」の時間が、納品物の質に直結します。</p>
+
+  <h3>僕のアプローチは、人力の「読み込み」をAIで再現すること</h3>
+  <p>AIに丸投げせず、AIに「このクライアントのプロファイル」を学ばせてから書く。</p>
+  <p>その結果、クライアントが読んで「うちの雰囲気そのまま」と感じられる初稿を、短い時間で出せるようになります。</p>
+
+  <div class="note">
+    <strong>この記事で伝えたいこと：</strong>「AIで書く」のではなく「AIにクライアントを学ばせてから書く」。この差が、納品物の差になります。
+  </div>
+
+  <h2 id="s2">2. 【ステップ1】ヒアリング｜5つの質問で、理念を言語化する</h2>
+  <p>受注後、最初に行うのが5つの質問です。契約前の商談や、CWのメッセージでやり取りします。</p>
+
+  <div class="step">
+    <span class="step-label">STEP 1</span>
+    <h3>ヒアリングで必ず聞く5つのこと</h3>
+    <table class="compare">
+      <tr><th>① 理念</th><td>この事務所／メディアで、一番大切にしていることは何ですか</td></tr>
+      <tr><th>② NG表現</th><td>絶対に使ってほしくない言葉はありますか（薬機法・景表法・他社批判など）</td></tr>
+      <tr><th>③ トーン</th><td>親しみ重視ですか、丁寧さ重視ですか（敬体／常体の希望も含めて）</td></tr>
+      <tr><th>④ 読者</th><td>この記事は、どんな悩みを持つ、どんな人に届けたいですか</td></tr>
+      <tr><th>⑤ CTAの温度</th><td>記事末尾で、読者にどこまで促したいですか（受診を強く勧める／情報提供だけで終える など）</td></tr>
+    </table>
+  </div>
+
+  <p>この5つを言語化してもらうことで、「クライアントの頭の中」が可視化されます。</p>
+  <p>特に重要なのは②NG表現と⑤CTAの温度です。この2つを外すと、信頼を一度で失います。</p>
+
+  <h2 id="s3">3. 【ステップ2】AIプロンプト設計｜ヒアリングを"再利用できる形"にする</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 2</span>
+    <h3>ヒアリング内容を、AIが毎回参照できるプロンプトに変換する</h3>
+    <p>ヒアリングで集めた情報は、次の案件でも使えるように、構造化してAIに渡します。</p>
+  </div>
+
+  <h3>プロンプト構造の実例</h3>
+  <p>医療クリニック案件なら、次のような形で渡しています。</p>
+
+  <table class="compare">
+    <tr><th>クライアント設定</th><td>虹いろキッズ皮膚科／方針：薬に頼りすぎない治療</td></tr>
+    <tr><th>想定読者</th><td>3〜8歳のアトピーの子を持つ母親／ステロイドへの不安あり</td></tr>
+    <tr><th>執筆レギュ</th><td>です・ます調／1文40字以内／専門用語には必ずカッコ注釈</td></tr>
+    <tr><th>禁止表現</th><td>「完治」「必ず治る」「副作用はない」「他院では」など</td></tr>
+    <tr><th>参考過去記事</th><td>（既存のクライアント記事3〜5本を添付）</td></tr>
+  </table>
+
+  <p>この「プロファイル」を、記事を書くたびにAIの冒頭に渡します。</p>
+  <p>AIは、プロファイルに沿った文体と語彙で下書きを出してくれます。</p>
+
+  <div class="note">
+    <strong>ポイント：</strong>このプロファイルは、クライアントごとに1つ作って保存します。2回目以降の発注では、プロファイルを使い回せるため、作業時間が半分以下に短縮されます。
+  </div>
+
+  <h2 id="s4">4. 【ステップ3】初稿作成｜レギュを守りながら、具体に落とす</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 3</span>
+    <h3>構成案 → 本文の順で作り、1章ごとに自己チェックをかける</h3>
+  </div>
+
+  <h3>初稿作成の、3つの小ステップ</h3>
+  <p>構成案を先に作って、クライアントに1度確認してもらってから本文に進む運用です。</p>
+
+  <ol>
+    <li>構成案（h2・h3の見出しだけ）を出して、方向性の合意を取る</li>
+    <li>合意後、本文を1章ずつ書く。章の終わりで「禁止表現に抵触してないか」をAIに自己チェックさせる</li>
+    <li>一次情報が必要な箇所（統計・ガイドラインなど）は、必ず出典URLを本文に明記する</li>
+  </ol>
+
+  <p>構成案で先に合意を取ることで、本文を書き終わってから「方向性が違う」になるリスクが消えます。</p>
+
+  <h2 id="s5">5. 【ステップ4】人の目でのチェック｜AIが絶対書けない部分を補う</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 4</span>
+    <h3>AI出力特有の違和感を、自分の目と手で潰す</h3>
+  </div>
+
+  <p>AIが出してくる文章には、独特のクセがあります。これを放置したまま納品すると、読者に「機械が書いた記事」とすぐ気づかれます。</p>
+
+  <h3>必ず手で直す4つのポイント</h3>
+  <table class="compare">
+    <tr><th>① 曖昧な結語の除去</th><td>「〜と言えるでしょう」「〜と考えられます」などを、断定か具体に書き直す</td></tr>
+    <tr><th>② 具体例の追加</th><td>抽象的な説明の後に、クライアントの現場に合う具体例を人の手で足す</td></tr>
+    <tr><th>③ 読者への寄り添い</th><td>「お子さんを思うからこその気持ちです」のような、人の体温が通った一文を入れる</td></tr>
+    <tr><th>④ 一次情報の裏取り</th><td>AIが引用した統計や制度を、公式サイトで再確認する</td></tr>
+  </table>
+
+  <p>この4つを人の手でやることで、AIで下書きした文章が「書き手の存在感がある記事」に変わります。</p>
+
+  <div class="note">
+    <strong>この工程だけは、AIに任せません。</strong>読者の心が動くかどうかは、書き手の体温が通っているかで決まります。
+  </div>
+
+  <h2 id="s6">6. 【ステップ5】擦り合わせ｜初稿で完璧を目指さない</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 5</span>
+    <h3>初稿を1回で完璧にしようとしない。擦り合わせで精度を上げる</h3>
+  </div>
+
+  <p>初稿を納品したあと、クライアントからのフィードバックを歓迎する姿勢で受け止めます。</p>
+  <p>「ここの言い回し、もう少し柔らかくしたい」。</p>
+  <p>「このCTAは、もう一段弱めてほしい」。</p>
+  <p>こうしたフィードバックは、次の案件の「クライアント・プロファイル」をアップデートする最高の材料です。</p>
+
+  <h3>擦り合わせの原則3つ</h3>
+  <ol>
+    <li>1回目のフィードバックは、全部そのまま受け入れる（議論しない）</li>
+    <li>2回目以降は、理由を聞いて、プロファイルに反映する</li>
+    <li>修正1〜2回で納品完了を目指す。それ以上かかる場合は、ヒアリングの精度を上げる</li>
+  </ol>
+
+  <p>擦り合わせを「負の作業」ではなく「次の案件への投資」と捉えると、継続案件への流れが自然にできます。</p>
+
+  <h2 id="s7">7. まとめ：AIで書くのではなく、AIに「クライアントを学ばせる」</h2>
+  <p>「AIで書くライター」と「AIにクライアントを学ばせてから書くライター」の違いは、ヒアリングの深さと言語化の精度にあります。</p>
+  <p>5つの質問で理念を引き出し、構造化してAIに渡し、人の目で温度を加え、擦り合わせで精度を上げる。</p>
+  <p>この5ステップを回せば、「AIを使っているのに、うちの雰囲気がそのまま」の記事が出来上がります。</p>
+  <p>単価の安いAIライターから抜け出す鍵は、技術ではなく姿勢です。クライアントを理解することを、工程として組み込むかどうかで、納品物の価値が変わります。</p>
+
+  <div class="samples">
+    <h4>この5ステップで作ったYMYLサンプル記事（3本）</h4>
+    <ul>
+      <li>【医療】子どものアトピー、ステロイドって本当に大丈夫？（想定クライアント：虹いろキッズ皮膚科）<br>
+      <a href="pediatric-atopy.html">pediatric-atopy.html</a></li>
+      <li>【金融】20代独身、生命保険は本当に必要？独立系FPが答える「入らない選択」（想定クライアント：ふらっと相談所）<br>
+      <a href="life-insurance-20s.html">life-insurance-20s.html</a></li>
+      <li>【法律】親の家、兄弟でどう分ける？もめない相続3つの型（想定クライアント：南風司法書士事務所）<br>
+      <a href="inheritance-siblings.html">inheritance-siblings.html</a></li>
+    </ul>
+    <p style="margin-top: 12px; font-size: 13px; color: var(--sub);">各記事の冒頭に、架空のクライアント設定と執筆レギュレーションを明記しています。「案件のレギュを完全再現する」というアプローチの実例としてご覧ください。</p>
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
