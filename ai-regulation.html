@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「AIで案件レギュを完全再現する」とはどういうことか｜人力ライターとの違いを分解する | 藤崎 律</title>
+<meta name="description" content="「AIで書くライター」と「人力ライター」の差は、読み込みの深さではなく「読み込みの再現可能性」にあります。藤崎律が実際に行っている、過去記事10本の読み込みから文体プロファイル作成まで、AIで案件レギュを再現する3つの技術を具体例つきで公開します。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --compare-bg: #f5f7f9;
+    --compare-border: #5a6a7a;
+    --case-bg: #faf7f0;
+    --case-border: #d4b480;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 27px;
+    line-height: 1.55;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 21px;
+    line-height: 1.55;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #3a4a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 16px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 14px;
+  }
+  table.compare th, table.compare td {
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th {
+    background: #e7ecf1;
+    font-weight: 700;
+  }
+  table.compare thead th {
+    width: 30%;
+  }
+
+  .case {
+    background: var(--case-bg);
+    border-left: 4px solid var(--case-border);
+    padding: 22px 26px;
+    margin: 32px 0;
+  }
+  .case-label {
+    display: inline-block;
+    background: var(--case-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .case h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    color: #8a6a3a;
+  }
+  .case-result {
+    background: rgba(255,255,255,0.6);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.85;
+    border-left: 3px solid #d4b480;
+  }
+  .case-result strong { color: #8a6a3a; }
+
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .samples {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 32px 0 24px;
+    font-size: 14.5px;
+  }
+  .samples h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .samples ul { margin: 0; padding-left: 20px; }
+  .samples li { padding: 4px 0; }
+  .samples a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  .samples a:hover { text-decoration: underline; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 21px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.compare th, table.compare td { padding: 7px 8px; font-size: 13px; }
+    .case { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">WORK PROCESS ・ 執筆：藤崎 律 ・ 想定読了時間 7分</div>
+  <h1>「AIで案件レギュを完全再現する」とはどういうことか｜人力ライターとの違いを分解する</h1>
+
+  <p class="lead">
+    「AIで書くライター」と「経験のある人力ライター」の差は、読み込みの深さではなく、「読み込みの再現可能性」にあります。この記事では、人力ライターが時間をかけてやっている「クライアントのレギュを体に入れる作業」を、AIで再現する3つの技術を、医療・金融の具体例つきで公開します。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">そもそも「案件レギュ」とは、何を含んでいるのか</a></li>
+      <li><a href="#s2">人力ライターと、AI活用の読み込みを並べて見る</a></li>
+      <li><a href="#s3">【ケース1】小児皮膚科クリニックのレギュを再現した例</a></li>
+      <li><a href="#s4">【ケース2】独立系FP事務所のレギュを再現した例</a></li>
+      <li><a href="#s5">AIで案件レギュを再現する、3つのコア技術</a></li>
+      <li><a href="#s6">AIで再現できないもの｜人の手で必ず補うべき領域</a></li>
+      <li><a href="#s7">まとめ：「AIで書く」と「AIで再現する」の違いが、単価の違い</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. そもそも「案件レギュ」とは、何を含んでいるのか</h2>
+  <p>「レギュレーション」と聞くと、禁止表現リストや文字数の指定を思い浮かべる方が多いかもしれません。</p>
+  <p>でも実際、記事の質に効いているのは、もっと細かく、クライアント自身も言語化できていない要素です。</p>
+
+  <h3>案件レギュに含まれる、5つの層</h3>
+  <table class="compare">
+    <tr><th>① 文体のクセ</th><td>敬体／常体、文末の揺らぎ、専門用語の扱い方</td></tr>
+    <tr><th>② 禁止表現</th><td>薬機法・景表法のNG、競合名・自社批判など</td></tr>
+    <tr><th>③ トーン</th><td>厳しさ／優しさ、ビジネスライク／親しみ</td></tr>
+    <tr><th>④ 構成の癖</th><td>h2の立て方、CTAの位置、見出しの疑問形率</td></tr>
+    <tr><th>⑤ 読者の暗黙知</th><td>この読者層が共有している前提知識・感情</td></tr>
+  </table>
+
+  <p>クライアントがヒアリングで言語化できるのは、たいてい①②③の表面だけです。④⑤は「過去記事を見れば伝わる」と任されるケースが多いのが現場感覚です。</p>
+
+  <h2 id="s2">2. 人力ライターと、AI活用の読み込みを並べて見る</h2>
+  <p>経験のある人力ライターは、受注後にクライアントの過去記事を3〜5本読み込む時間を取ります。</p>
+  <p>この時間に、文体・トーン・CTA位置・読者の暗黙知までを体に入れていきます。</p>
+  <p>AI活用の読み込みは、この工程を「量」と「言語化」で拡張します。</p>
+
+  <h3>人力 vs AI活用の読み込みを比較</h3>
+  <table class="compare">
+    <thead>
+      <tr><th>項目</th><th>人力ライター</th><th>AI活用（藤崎律の方法）</th></tr>
+    </thead>
+    <tr><td>読み込む記事数</td><td>3〜5本（時間に応じて）</td><td>10〜20本（AIの速度を活かす）</td></tr>
+    <tr><td>文体パターンの抽出</td><td>感覚・経験則</td><td>AIに「文体の特徴5つ」を言語化させる</td></tr>
+    <tr><td>禁止表現リスト</td><td>ヒアリング＋経験則の推測</td><td>ヒアリング＋AIが過去記事から逆算</td></tr>
+    <tr><td>CTA分析</td><td>1本ずつ読んで気づく</td><td>AIに「CTAパターンを分類」させる</td></tr>
+    <tr><td>再利用性</td><td>書き手の脳内にのみ残る</td><td>プロファイル化して、別案件に転用可能</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>ポイント：</strong>人力ライターの作業を否定するわけではありません。AIは、人力の読み込みを「量」で拡張し、「言語化」で保存可能な資産に変える道具です。
+  </div>
+
+  <h2 id="s3">3. 【ケース1】小児皮膚科クリニックのレギュを再現した例</h2>
+
+  <div class="case">
+    <span class="case-label">CASE 1 / 医療</span>
+    <h3>想定クライアント：虹いろキッズ皮膚科（架空）</h3>
+    <p>実際に、架空クライアントの過去記事を想定した状態で、以下の工程を回しました。</p>
+
+    <h3 style="font-size: 15px; color: #3a4a5a;">工程</h3>
+    <ol>
+      <li>サイトから過去記事10本を仮想サンプルとして用意</li>
+      <li>AIに「この10本の文体の特徴を、5つに絞って言語化してください」と依頼</li>
+      <li>返ってきたのが右の5項目</li>
+      <li>この5項目をプロンプト冒頭の「クライアント・プロファイル」に組み込む</li>
+      <li>本文を書くたびに、AIがこの5項目に沿った文体で初稿を出すようになる</li>
+    </ol>
+
+    <h3 style="font-size: 15px; color: #3a4a5a; margin-top: 20px;">AIが抽出した5項目</h3>
+    <ol>
+      <li>です・ます調で統一</li>
+      <li>1文は40字以内に抑える</li>
+      <li>医療専門用語には必ずカッコで注釈をつける</li>
+      <li>見出しは「〜ってなに？」のような語りかけ調</li>
+      <li>結論を見出しで断定しない（本文で丁寧に説明する前提）</li>
+    </ol>
+
+    <div class="case-result">
+      <strong>結果：</strong>想定クライアント・ブリーフに沿った初稿を1発で出せる状態になりました。実際のサンプル記事（<a href="pediatric-atopy.html">子どものアトピー、ステロイドって本当に大丈夫？</a>）で、この5項目を全て守って執筆しています。
+    </div>
+  </div>
+
+  <h2 id="s4">4. 【ケース2】独立系FP事務所のレギュを再現した例</h2>
+
+  <div class="case">
+    <span class="case-label">CASE 2 / 金融</span>
+    <h3>想定クライアント：ふらっと相談所（架空の「売らない相談所」）</h3>
+    <p>金融系では、文体より「立ち位置」の再現がもっと重要になります。</p>
+
+    <h3 style="font-size: 15px; color: #3a4a5a;">工程</h3>
+    <ol>
+      <li>想定クライアントの事務所方針「金融商品の販売をしない、相談料のみで運営」をヒアリング情報として整理</li>
+      <li>AIに「このメディアの立ち位置を、5つの形容詞で表現してください」と依頼</li>
+      <li>返ってきたのが右の5項目</li>
+      <li>CTAも「受診を促す」ではなく「相談してみる価値があるかもしれない」トーンに統一</li>
+    </ol>
+
+    <h3 style="font-size: 15px; color: #3a4a5a; margin-top: 20px;">AIが抽出した5つの立ち位置</h3>
+    <ol>
+      <li>中立（売り手の立場に偏らない）</li>
+      <li>慎重（断定より「場合によって」を使う）</li>
+      <li>長期視点（短期の商品推奨をしない）</li>
+      <li>教育的（なぜそう考えるかの根拠を必ず示す）</li>
+      <li>低姿勢（上から教えるトーンを避ける）</li>
+    </ol>
+
+    <div class="case-result">
+      <strong>結果：</strong>「販売型FP」と「相談型FP」の違いを明確に打ち出した記事（<a href="life-insurance-20s.html">20代独身、生命保険は本当に必要？独立系FPが答える「入らない選択」</a>）が出来上がりました。禁止表現（「絶対」「必ず」「〇〇だけで安心」など）も、プロファイルに組み込むことで自動的に回避できます。
+    </div>
+  </div>
+
+  <h2 id="s5">5. AIで案件レギュを再現する、3つのコア技術</h2>
+
+  <p>ケース1・2を含め、藤崎律が全ての案件で共通して回している技術が3つあります。</p>
+
+  <h3>コア技術①：過去記事を10本以上、AIに読み込ませる</h3>
+  <p>人力の3〜5本では見えないパターンが、10本以上読むと浮かび上がります。</p>
+  <p>AIの処理速度を活かせば、10本の読み込みは数分で終わります。</p>
+
+  <h3>コア技術②：文体パターンを「5項目」で言語化させる</h3>
+  <p>「このメディアっぽい文章にして」ではなく、「このメディアの文体の特徴を5項目で挙げて」と頼みます。</p>
+  <p>5項目という具体的な数を指定することで、AIは曖昧な抽象論ではなく、再利用できる形で返してくれます。</p>
+
+  <h3>コア技術③：プロンプト冒頭に「クライアント・プロファイル」として常に貼る</h3>
+  <p>①②で得た内容を、記事を書くたびに毎回プロンプト冒頭に貼ります。</p>
+  <p>これで、どんな記事を書いても「このクライアントのレギュを守った初稿」が出てくるようになります。</p>
+  <p>プロファイルは一度作れば、2回目以降の案件でそのまま使い回せます。</p>
+
+  <div class="note">
+    <strong>この3つが、「AIで書くライター」から「AIで再現するライター」への分岐点です。</strong>技術そのものは難しくありません。ただ、「毎回やる」ことで差が積み重なります。
+  </div>
+
+  <h2 id="s6">6. AIで再現できないもの｜人の手で必ず補うべき領域</h2>
+
+  <p>AIで案件レギュを再現できるようになっても、人の手で絶対に補う必要がある領域があります。</p>
+
+  <h3>AIで再現できない4つの要素</h3>
+  <table class="compare">
+    <tr><th>① クライアントとの「暗黙の信頼」</th><td>やり取りの温度感、修正の受け止め方。関係の積み重ねでしか生まれない</td></tr>
+    <tr><th>② 業界の最新トレンド</th><td>AIの学習データには、直近数ヶ月の動向が含まれていないことが多い</td></tr>
+    <tr><th>③ 一次情報の裏取り</th><td>AIが引用した統計や制度を、公式サイトで再確認するのは人の仕事</td></tr>
+    <tr><th>④ 読者の体温を感じる書き方</th><td>「お子さんを思うからこその気持ちです」のような共感の一文は、人の手で書く</td></tr>
+  </table>
+
+  <p>①〜④を人の手で補ってはじめて、「クライアントのレギュを再現し、かつ読者の心を動かす記事」が完成します。</p>
+
+  <h2 id="s7">7. まとめ：「AIで書く」と「AIで再現する」の違いが、単価の違い</h2>
+
+  <p>AIで書くライターは、どのクライアントにも同じ平均的な記事を出します。</p>
+  <p>AIで再現するライターは、クライアントごとに合わせた記事を出します。</p>
+  <p>この違いは、納品物の質の違いになり、そのまま単価の違いになります。</p>
+  <p>「AIを使えるライター」はこの1年で一気に増えました。</p>
+  <p>でも、「AIで案件レギュを再現できるライター」は、まだ少数です。</p>
+  <p>その差は、過去記事を10本読み込むこと、文体を5項目で言語化すること、プロファイルを毎回貼ること、という地味な3つの技術にあります。</p>
+  <p>難しいことではなく、「毎回やるかどうか」で分かれる差です。</p>
+
+  <div class="samples">
+    <h4>関連記事（藤崎律の仕事論・サンプル）</h4>
+    <ul>
+      <li>この記事の前提になる全体フロー：<a href="writing-process.html">クライアントの理念を、記事に落とすまで｜ヒアリングから擦り合わせまでの5ステップ</a></li>
+      <li>医療レギュを再現したサンプル：<a href="pediatric-atopy.html">子どものアトピー、ステロイドって本当に大丈夫？（想定：虹いろキッズ皮膚科）</a></li>
+      <li>金融レギュを再現したサンプル：<a href="life-insurance-20s.html">20代独身、生命保険は本当に必要？（想定：ふらっと相談所）</a></li>
+      <li>法律レギュを再現したサンプル：<a href="inheritance-siblings.html">親の家、兄弟でどう分ける？もめない相続3つの型（想定：南風司法書士事務所）</a></li>
+    </ul>
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
