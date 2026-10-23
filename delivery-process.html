@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初めてAIライターに依頼される方へ｜打ち合わせから納品まで、各段階の実物サンプルを全部見せます | 藤崎 律</title>
+<meta name="description" content="AIライターに依頼するのが初めてで不安な方へ。藤崎律の納品フローを、各段階の実物サンプル（ヒアリングシート・構成案・初稿・修正ログ・納品物リスト）とともに公開します。「途中が見えない」ブラックボックス問題を、仕組みで解決する5段階の仕事術です。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --step-bg: #f5f7f9;
+    --step-border: #5a6a7a;
+    --sample-bg: #fcfaf4;
+    --sample-border: #c8b58a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #3a4a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  .step {
+    background: var(--step-bg);
+    border-left: 4px solid var(--step-border);
+    padding: 22px 26px;
+    margin: 32px 0;
+  }
+  .step-label {
+    display: inline-block;
+    background: var(--step-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .step h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    color: #2a3a4a;
+  }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 14.5px;
+  }
+  table.compare th, table.compare td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th {
+    background: #e7ecf1;
+    font-weight: 700;
+    width: 32%;
+  }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+
+  /* 実物サンプルブロック（本記事独自） */
+  .sample-box {
+    background: var(--sample-bg);
+    border: 1px solid var(--sample-border);
+    padding: 22px 26px;
+    margin: 24px 0 32px;
+    font-size: 14.5px;
+    line-height: 1.85;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .sample-label {
+    display: inline-block;
+    background: #8c7a4e;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .sample-box h4 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #4a3a1a;
+    font-weight: 700;
+  }
+  .sample-box ol, .sample-box ul {
+    margin: 10px 0 10px;
+    padding-left: 22px;
+  }
+  .sample-box li { padding: 2px 0; }
+  .sample-box .quote {
+    background: #fff;
+    border: 1px dashed var(--sample-border);
+    padding: 14px 18px;
+    margin: 10px 0;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: #333;
+  }
+  .sample-box .diff-add {
+    background: #e8f3e8;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  .sample-box .diff-del {
+    background: #f6e5e5;
+    padding: 2px 4px;
+    border-radius: 2px;
+    text-decoration: line-through;
+    color: #955;
+  }
+
+  /* フロー図 */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 28px 0 32px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13.5px;
+  }
+  .flow-item {
+    flex: 1 1 120px;
+    background: #fff;
+    border: 1px solid var(--step-border);
+    border-left: 4px solid var(--step-border);
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .flow-item strong {
+    display: block;
+    font-size: 11px;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .samples {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 32px 0 24px;
+    font-size: 14.5px;
+  }
+  .samples h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .samples ul { margin: 0; padding-left: 20px; }
+  .samples li { padding: 4px 0; }
+  .samples a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  .samples a:hover { text-decoration: underline; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.compare th, table.compare td { padding: 8px 10px; font-size: 13.5px; }
+    .step { padding: 18px 20px; }
+    .sample-box { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">WORK PROCESS ・ 執筆：藤崎 律 ・ 想定読了時間 8分</div>
+  <h1>初めてAIライターに依頼される方へ｜打ち合わせから納品まで、各段階の実物サンプルを全部見せます</h1>
+
+  <p class="lead">
+    AIライターに依頼するとき、一番の不安は「途中が見えない」ことだと思います。依頼ボタンを押して、2週間後にいきなり原稿が送られてくる。そこで初めて「違う」と気づいても、やり直す時間がない。この記事では、藤崎律が実際にやっている納品フローを、各段階の実物サンプル（ヒアリングシート・構成案・初稿・修正ログ・納品物リスト）とともに全部公開します。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">なぜ「ブラックボックス」が起きるのか</a></li>
+      <li><a href="#s2">全体フロー｜5段階、毎回同じ順番で進める</a></li>
+      <li><a href="#s3">【段階1】キックオフMTG｜ヒアリングシート10項目の実物</a></li>
+      <li><a href="#s4">【段階2】構成案｜h2・h3と各章の狙いまでセットで提出</a></li>
+      <li><a href="#s5">【段階3】初稿｜冒頭セクションの実物を見せます</a></li>
+      <li><a href="#s6">【段階4】修正対応｜修正ログで「どこを・なぜ・どう直したか」を残す</a></li>
+      <li><a href="#s7">【段階5】納品｜成果物は本文だけじゃありません</a></li>
+      <li><a href="#s8">まとめ：毎段階でモノが残る＝途中で止めても戻せる</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. なぜ「ブラックボックス」が起きるのか</h2>
+  <p>記事制作でクライアントが一番不安になるのは、「頼んでから納品されるまで、何がどう進んでいるのかが分からない」ことです。</p>
+  <p>この不透明さが起きる理由は、ライター側に「渡すタイミング」の設計がないからです。原稿が完成するまで何も見せない運用だと、クライアントはチェックの機会を1回しか持てません。</p>
+  <p>一方、僕のやり方は、5つの段階ごとに「必ず何かを渡す」運用です。渡すタイミングが固定されているので、各段階でクライアントが安心して方向修正できます。</p>
+
+  <div class="note">
+    <strong>この記事で伝えたいこと：</strong>納品の質は「書く力」よりも「渡すタイミングの設計」で決まります。段階ごとに成果物が残る仕組みなら、途中で止めてもやり直せます。
+  </div>
+
+  <h2 id="s2">2. 全体フロー｜5段階、毎回同じ順番で進める</h2>
+  <p>依頼を受けてから納品完了まで、毎回この順番で進めます。</p>
+
+  <div class="flow">
+    <div class="flow-item"><strong>段階 1</strong>キックオフMTG</div>
+    <div class="flow-item"><strong>段階 2</strong>構成案</div>
+    <div class="flow-item"><strong>段階 3</strong>初稿</div>
+    <div class="flow-item"><strong>段階 4</strong>修正対応</div>
+    <div class="flow-item"><strong>段階 5</strong>納品</div>
+  </div>
+
+  <p>各段階で、必ず「クライアントが確認して、OKかNGかを言える成果物」を出します。NGなら次に進まない。これが「ブラックボックスをなくす」ための唯一の方法です。</p>
+
+  <p>この記事では、実例として、以前執筆したサンプル記事「<a href="pediatric-atopy.html">子どものアトピー、ステロイドって本当に大丈夫？</a>」（想定クライアント：虹いろキッズ皮膚科）の制作フローを使います。</p>
+
+  <h2 id="s3">3. 【段階1】キックオフMTG｜ヒアリングシート10項目の実物</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 1</span>
+    <h3>依頼が決まったら、最初に送るヒアリングシート</h3>
+    <p>MTGの前に、下の10項目を記入してもらいます。これだけで、認識ずれの8割は消えます。</p>
+  </div>
+
+  <div class="sample-box">
+    <span class="sample-label">SAMPLE｜ヒアリングシート</span>
+    <h4>虹いろキッズ皮膚科 様｜記事依頼ヒアリングシート</h4>
+    <ol>
+      <li>記事タイトル（仮）</li>
+      <li>想定読者（年齢・性別・悩み・情報収集レベル）</li>
+      <li>記事のゴール（読者にどう動いてほしいか）</li>
+      <li>御院の理念で、記事に反映したい一文</li>
+      <li>絶対に使ってほしくない言葉（薬機法・景表法・他院比較など）</li>
+      <li>推奨する表現、よく使っている言い回し</li>
+      <li>敬体／常体、親しみ／丁寧さの比率</li>
+      <li>記事内に入れたい一次情報（院の症例・医師の見解など）</li>
+      <li>記事末尾のCTAの温度感（受診勧奨の強さ）</li>
+      <li>納期と優先度（スピード重視／質重視）</li>
+    </ol>
+  </div>
+
+  <p>この10項目は、業界やジャンルが変わっても形は変わりません。医療でも金融でも、同じテンプレートで聞きます。クライアントも「毎回同じ質問に答えればいい」と予測できるので、記入負担が減ります。</p>
+
+  <h2 id="s4">4. 【段階2】構成案｜h2・h3と各章の狙いまでセットで提出</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 2</span>
+    <h3>本文を書く前に、構成だけでクライアントの合意を取る</h3>
+    <p>構成案の段階で合意を取れば、本文を書き終わってから「方向が違う」になるリスクがゼロになります。</p>
+  </div>
+
+  <div class="sample-box">
+    <span class="sample-label">SAMPLE｜構成案（抜粋）</span>
+    <h4>記事タイトル：子どものアトピー、ステロイドって本当に大丈夫？</h4>
+    <table class="compare">
+      <tr><th>h2｜ステロイドが怖いと言われる理由</th><td>保護者が検索段階で持っている不安を、否定せず受け止める章。SNSの誤情報の存在に触れる</td></tr>
+      <tr><th>h2｜実際のところ、何が本当なのか</th><td>日本皮膚科学会のガイドラインを一次情報として紹介。「正しい使い方なら安全」を事実ベースで示す</td></tr>
+      <tr><th>h2｜薬との付き合い方｜3つの原則</th><td>「少量を短期間」「症状に合わせて強さを変える」「医師と相談しながら減らす」の3原則を解説</td></tr>
+      <tr><th>h2｜迷ったときに、医師に聞いてほしいこと</th><td>CTAに繋がる章。受診を強く勧めず、「相談していい」ことを伝える温度に抑える</td></tr>
+    </table>
+  </div>
+
+  <p>各h2の右側に「狙い」を1行添えるのがポイントです。見出しだけだとクライアントが判断に迷うからです。</p>
+
+  <div class="note">
+    <strong>ここで止めるメリット：</strong>構成案の段階なら、方向転換のコストは1〜2時間。本文を書き終わってからだと、丸1日が消えます。
+  </div>
+
+  <h2 id="s5">5. 【段階3】初稿｜冒頭セクションの実物を見せます</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 3</span>
+    <h3>構成案に合意が取れたら、本文の初稿を1章ずつ書く</h3>
+    <p>一気に全文書かず、章ごとに自己チェックを入れながら進めます。</p>
+  </div>
+
+  <div class="sample-box">
+    <span class="sample-label">SAMPLE｜初稿（冒頭セクションの実物）</span>
+    <h4>h2｜ステロイドが怖いと言われる理由</h4>
+    <div class="quote">
+      「ステロイドは怖い薬」。<br>
+      お子さんのアトピーで通院したとき、周囲からこう言われた経験はありませんか。<br><br>
+      SNSを開くと、「ステロイドで肌が黒くなる」「使い続けると治らなくなる」といった投稿が目に入ります。<br>
+      お子さんのことを思うからこそ、不安になるのは当然です。<br><br>
+      ただ、こうした情報の多くは、医学的な根拠が示されていない個人の体験談です。信じるか迷ったときに読んでいただきたいのが、日本皮膚科学会が公開している「アトピー性皮膚炎診療ガイドライン」です。
+    </div>
+    <p style="margin: 10px 0 0; font-size: 13px; color: var(--sub);">※この冒頭の2段落で、ヒアリング項目④「御院の理念：保護者の不安を否定しない」と、項目⑤「禁止表現：ステロイド＝危険という断定」の両方を満たしています。</p>
+  </div>
+
+  <p>初稿を渡すとき、「どの章がヒアリングのどの項目に対応しているか」の対応表も一緒に送ります。クライアントは「ちゃんと聞いた内容が反映されている」ことを、確認なしで把握できます。</p>
+
+  <h2 id="s6">6. 【段階4】修正対応｜修正ログで「どこを・なぜ・どう直したか」を残す</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 4</span>
+    <h3>修正は口頭で済まさない。1件ずつログに残す</h3>
+    <p>どこを・なぜ・どう直したかを文字で残すことで、2回目以降の案件の「クライアント・プロファイル」が育っていきます。</p>
+  </div>
+
+  <div class="sample-box">
+    <span class="sample-label">SAMPLE｜修正ログ（抜粋）</span>
+    <h4>第1稿 → 第2稿の修正記録（計5件）</h4>
+    <table class="compare">
+      <tr><th>修正1｜h2「薬との付き合い方」</th><td>
+        <span class="diff-del">正しく使えば安全です</span><br>
+        <span class="diff-add">医師の指示に沿って使う分には、過剰に怖がる必要はありません</span><br>
+        <small style="color:var(--sub);">理由：院長から「断定表現は避けたい」との指示</small>
+      </td></tr>
+      <tr><th>修正2｜h2「迷ったとき」のCTA</th><td>
+        <span class="diff-del">お早めにご相談ください</span><br>
+        <span class="diff-add">気になることがあれば、ひとりで悩まず相談いただければと思います</span><br>
+        <small style="color:var(--sub);">理由：受診を急かすトーンを避け、「相談していい」姿勢を優先</small>
+      </td></tr>
+      <tr><th>修正3｜専門用語の注釈追加</th><td>
+        「寛解」に「（かんかい：症状が落ち着いた状態）」を追記<br>
+        <small style="color:var(--sub);">理由：想定読者（3〜8歳の保護者）が初見で読む語を補足</small>
+      </td></tr>
+    </table>
+    <p style="margin: 10px 0 0; font-size: 13px; color: var(--sub);">※この5件はすべて「クライアント・プロファイル」に反映。次回以降の執筆では、同じ指摘が発生しないようにAIプロンプトを更新します。</p>
+  </div>
+
+  <p>修正ログは、クライアントにとっても「どう直したか」が記録として残るので、ダブルチェックの手間が減ります。</p>
+
+  <h2 id="s7">7. 【段階5】納品｜成果物は本文だけじゃありません</h2>
+
+  <div class="step">
+    <span class="step-label">STEP 5</span>
+    <h3>本文だけ送って終わりにしない。運用に必要なものを一式そろえる</h3>
+  </div>
+
+  <div class="sample-box">
+    <span class="sample-label">SAMPLE｜納品物リスト</span>
+    <h4>虹いろキッズ皮膚科 様｜納品物一式</h4>
+    <ol>
+      <li>本文Wordファイル（装飾なし、公開前チェック用）</li>
+      <li>本文HTMLファイル（h2・h3・リスト・tableタグ入り。CMSに貼るだけで公開可）</li>
+      <li>メタ情報一式（タイトル・ディスクリプション・OGP用抜粋）</li>
+      <li>画像指示書（挿入箇所・推奨イメージ・alt属性案）</li>
+      <li>参考文献リスト（本文で引用した一次情報のURL一覧）</li>
+      <li>クライアント・プロファイル更新版（次回執筆に使う内部ドキュメント）</li>
+    </ol>
+  </div>
+
+  <p>特に大事なのが6番の「クライアント・プロファイル更新版」です。今回の案件で得られたフィードバックを文字で残しておくことで、2本目・3本目の執筆が、1本目の半分の時間で仕上がるようになります。</p>
+
+  <div class="note">
+    <strong>継続案件を狙う方へ：</strong>この「プロファイル」こそが、他ライターに代替されない資産です。クライアント側に残してもらうことで、「このライターでなければならない理由」が生まれます。
+  </div>
+
+  <h2 id="s8">8. まとめ：毎段階でモノが残る＝途中で止めても戻せる</h2>
+  <p>納品フローで一番大事なのは、「書く力」ではなく「渡すタイミングの設計」です。</p>
+  <p>キックオフMTGでヒアリングシートを渡し、構成案で合意を取り、初稿を章ごとに渡し、修正ログで記録を残し、納品物を一式そろえる。</p>
+  <p>この5段階を回せば、クライアントは「進捗が見えない不安」から解放されます。そしてライター側も、各段階でクライアントの反応が得られるので、ズレを早期に修正できます。</p>
+  <p>AIを使うか使わないかより、この「段階ごとに渡す仕組み」を持っているかどうかが、継続契約に繋がるかどうかの分かれ目です。</p>
+
+  <div class="samples">
+    <h4>この納品フローで実際に作ったサンプル記事（3本）</h4>
+    <ul>
+      <li>【医療】子どものアトピー、ステロイドって本当に大丈夫？（本記事の実例・想定クライアント：虹いろキッズ皮膚科）<br>
+      <a href="pediatric-atopy.html">pediatric-atopy.html</a></li>
+      <li>【金融】20代独身、生命保険は本当に必要？独立系FPが答える「入らない選択」（想定クライアント：ふらっと相談所）<br>
+      <a href="life-insurance-20s.html">life-insurance-20s.html</a></li>
+      <li>【法律】親の家、兄弟でどう分ける？もめない相続3つの型（想定クライアント：南風司法書士事務所）<br>
+      <a href="inheritance-siblings.html">inheritance-siblings.html</a></li>
+    </ul>
+    <p style="margin-top: 12px; font-size: 13px; color: var(--sub);">各記事は、本記事で紹介した5段階のフローを通って完成しました。「書く前のヒアリング」については<a href="writing-process.html">こちらの記事</a>、「AIで案件レギュを再現する技術」については<a href="ai-regulation.html">こちらの記事</a>も合わせてご覧ください。</p>
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
