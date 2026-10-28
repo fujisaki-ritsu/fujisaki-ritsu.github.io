@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>藤崎 律｜AI活用ライター｜案件ごとの理念・レギュを、AIで完全再現して納品する</title>
+<meta name="description" content="藤崎 律（24歳フリーランスライター）のポートフォリオサイト。医療・金融・法律のYMYL領域で、クライアントの理念と執筆レギュをAIで完全再現し、人の体温で仕上げる記事を納品しています。クラウドワークス評価5.0・完了率100%。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --accent-light: #8ba3c7;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --card-bg: #ffffff;
+    --card-hover: #f5f7f9;
+    --star: #d4a147;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.9;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ヘッダー */
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+    background: #fff;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .brand-sub {
+    font-size: 12px;
+    color: var(--sub);
+    letter-spacing: 0.1em;
+    margin-left: 10px;
+  }
+  nav.main-nav a {
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13px;
+    color: var(--sub);
+    margin-left: 20px;
+    letter-spacing: 0.06em;
+  }
+  nav.main-nav a:hover { color: var(--accent); }
+
+  /* ファーストビュー */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 34px;
+    line-height: 1.5;
+    margin: 0 0 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(transparent 65%, #e7ecf1 65%);
+    padding: 0 2px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--sub);
+    margin: 0 0 32px;
+    line-height: 1.9;
+  }
+  .trust-row {
+    display: inline-flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: var(--note-bg);
+    border: 1px solid var(--note-border);
+    padding: 14px 24px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13.5px;
+    color: #333;
+  }
+  .trust-row .star {
+    color: var(--star);
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .trust-row .divider {
+    color: var(--line);
+  }
+  .trust-row a {
+    color: var(--accent);
+    border-bottom: 1px dotted var(--accent-light);
+  }
+
+  /* プロフィール */
+  .about {
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+  }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .about-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: serif;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .about-body h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .about-body p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .about-body .meta-row {
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 10px;
+  }
+
+  /* カテゴリ */
+  .category-section {
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-head h2 {
+    font-size: 24px;
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+  }
+  .section-head p {
+    font-size: 14px;
+    color: var(--sub);
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .cat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    padding: 28px 26px;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+  .cat-card:hover {
+    background: var(--card-hover);
+  }
+  .cat-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    align-self: flex-start;
+  }
+  .cat-badge.coming {
+    background: #999;
+  }
+  .cat-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+  .cat-desc {
+    font-size: 14px;
+    color: var(--sub);
+    line-height: 1.85;
+    margin: 0 0 20px;
+    flex-grow: 1;
+  }
+  .cat-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13.5px;
+  }
+  .cat-links li {
+    padding: 5px 0;
+  }
+  .cat-links a {
+    color: var(--accent);
+    display: block;
+    padding: 2px 0;
+  }
+  .cat-links a:hover {
+    text-decoration: underline;
+  }
+  .cat-links a::before {
+    content: "▸ ";
+    color: var(--accent-light);
+  }
+  .cat-coming-note {
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 13px;
+    color: var(--sub);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin: 0;
+  }
+
+  /* CTA */
+  .cta {
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .cta h2 {
+    font-size: 22px;
+    margin: 0 0 20px;
+  }
+  .cta p {
+    color: var(--sub);
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 28px;
+  }
+  .cta-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff !important;
+    padding: 14px 28px;
+    font-size: 14.5px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--accent);
+    transition: background 0.2s;
+  }
+  .cta-btn:hover {
+    background: #3a4a5a;
+  }
+  .cta-btn.outline {
+    background: #fff;
+    color: var(--accent) !important;
+  }
+  .cta-btn.outline:hover {
+    background: var(--card-hover);
+  }
+
+  /* フッター */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    text-align: center;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    font-size: 12px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 720px) {
+    .hero { padding: 56px 0 40px; }
+    .hero h1 { font-size: 24px; }
+    .hero-sub { font-size: 14.5px; }
+    .trust-row { font-size: 12.5px; padding: 12px 18px; gap: 10px; }
+    .about-inner { grid-template-columns: 1fr; justify-items: center; text-align: left; }
+    .cat-grid { grid-template-columns: 1fr; gap: 18px; }
+    .cat-card { min-height: auto; padding: 24px 22px; }
+    .header-inner { flex-direction: column; gap: 10px; }
+    nav.main-nav a { margin: 0 10px; }
+    .cta-links { flex-direction: column; align-items: stretch; padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div>
+      <span class="brand">藤崎 律</span>
+      <span class="brand-sub">AI活用ライター</span>
+    </div>
+    <nav class="main-nav">
+      <a href="#about">プロフィール</a>
+      <a href="#works">カテゴリ</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero container">
+  <h1>案件ごとの理念・レギュ・言葉の癖を、<br><em>AIで完全再現</em>して納品する。</h1>
+  <p class="hero-sub">
+    医療・金融・法律のYMYL領域で、クライアントの事務所方針や言葉の体温を事前にヒアリング。<br>
+    AIで下書きし、人の目と手で仕上げる記事を納品しています。
+  </p>
+  <div class="trust-row">
+    <span><span class="star">★★★★★</span> クラウドワークス総合評価 5.0</span>
+    <span class="divider">｜</span>
+    <span>完了率 100%</span>
+    <span class="divider">｜</span>
+    <span><a href="https://crowdworks.jp/public/employees/6939312" target="_blank" rel="noopener">公開プロフィール</a></span>
+  </div>
+</section>
+
+<section class="about container" id="about">
+  <div class="about-inner">
+    <div class="about-avatar">律</div>
+    <div class="about-body">
+      <h2>藤崎 律（ふじさき りつ）</h2>
+      <p>24歳フリーランスライター（独立準備中）。「AIで記事を書く」のではなく「AIにクライアントを学ばせてから書く」というアプローチで、医療・金融・法律などのYMYL領域を中心に執筆しています。</p>
+      <p>得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。マナブ型のI did型・How-to型・本質論型を使い分け、読者の心が動く一文を人の手で足すことを大切にしています。</p>
+      <p class="meta-row">対応ジャンル：医療・金融・法律・美容・健康・AI活用・業務効率化・20代キャリア　／　執筆実績：クラウドワークスを中心に実案件対応中</p>
+    </div>
+  </div>
+</section>
+
+<section class="category-section container" id="works">
+  <div class="section-head">
+    <h2>作品カテゴリ</h2>
+    <p>想定クライアント（架空の事務所・メディア）に合わせて書いたサンプル記事</p>
+  </div>
+
+  <div class="cat-grid">
+
+    <!-- ① YMYL実績 -->
+    <div class="cat-card">
+      <span class="cat-badge">① YMYL実績</span>
+      <h3 class="cat-title">医療・金融・法律の<br>想定クライアントブリーフ</h3>
+      <p class="cat-desc">
+        架空の小児皮膚科・独立系FP事務所・地方司法書士事務所を想定クライアントに設定し、各領域のレギュレーションを守りながら執筆したサンプル記事です。各記事の冒頭に想定クライアント設定と執筆レギュを明記しています。
+      </p>
+      <ul class="cat-links">
+        <li><a href="pediatric-atopy.html">【医療】子どものアトピー、ステロイドって本当に大丈夫？</a></li>
+        <li><a href="life-insurance-20s.html">【金融】20代独身、生命保険は本当に必要？</a></li>
+        <li><a href="inheritance-siblings.html">【法律】親の家、兄弟でどう分ける？もめない相続3つの型</a></li>
+        <li><a href="mens-skincare.html">【美容】敏感肌・アトピー持ち男性のメンズスキンケア</a></li>
+      </ul>
+    </div>
+
+    <!-- ② 仕事の進め方 -->
+    <div class="cat-card">
+      <span class="cat-badge">② 仕事の進め方</span>
+      <h3 class="cat-title">ヒアリング・AI活用・<br>納品フローの考え方</h3>
+      <p class="cat-desc">
+        「なぜAIを使っても案件のレギュを再現できるのか」の思考プロセス・技術・納品フローを分解したメタ記事3本。初めて依頼される方へ、仕事の進め方を実物サンプルつきで公開しています。
+      </p>
+      <ul class="cat-links">
+        <li><a href="writing-process.html">クライアントの理念を記事に落とすまで｜5ステップ</a></li>
+        <li><a href="ai-regulation.html">「AIで案件レギュを完全再現する」とはどういうことか</a></li>
+        <li><a href="delivery-process.html">打ち合わせから納品まで、各段階の実物サンプル</a></li>
+      </ul>
+    </div>
+
+    <!-- ③ 藤崎律について -->
+    <div class="cat-card">
+      <span class="cat-badge coming">③ 藤崎律について</span>
+      <h3 class="cat-title">自己紹介・AI観<br>（準備中）</h3>
+      <p class="cat-desc">
+        なぜAIライティングを選んだのか、どんな人の役に立ちたいのか。
+        僕のAI観・学習観を、現在準備中です。
+      </p>
+      <p class="cat-coming-note">現時点ではプロフィール欄をご覧ください。</p>
+    </div>
+
+    <!-- ④ AI活用・技術 -->
+    <div class="cat-card">
+      <span class="cat-badge">④ AI活用・技術</span>
+      <h3 class="cat-title">AI × 業務効率化の<br>実装記録</h3>
+      <p class="cat-desc">
+        Claude Codeや、REST API × PowerShellを用いた記事入稿の自動化・時短の実装記録。「AIを使って何時間短縮できたか」を、具体的なスクリプトとともに公開しています。
+      </p>
+      <ul class="cat-links">
+        <li><a href="claude-code-time-saving.html">Claude CodeでWordPress入稿を5倍速にした話</a></li>
+        <li><a href="wordpress-automation.html">Markdown原稿からWordPressへ記事を一括公開する</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta container" id="contact">
+  <h2>お仕事のご相談</h2>
+  <p>
+    クラウドワークス経由でのお仕事相談を受け付けております。<br>
+    「AIで下書きしてから、人の目と手で仕上げる」アプローチが合いそうな案件があれば、ぜひお気軽にお声がけください。
+  </p>
+  <div class="cta-links">
+    <a href="https://crowdworks.jp/public/employees/6939312" target="_blank" rel="noopener" class="cta-btn">クラウドワークスでご相談</a>
+    <a href="https://coconala.com/users/4858128" target="_blank" rel="noopener" class="cta-btn outline">ココナラでご相談</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 藤崎 律｜AI活用ライター｜fujisaki-ritsu.github.io
+  </div>
+</footer>
+
+</body>
+</html>
