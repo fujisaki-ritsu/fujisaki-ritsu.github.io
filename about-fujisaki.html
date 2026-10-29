@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜ、僕はAIで記事を書くことにしたのか｜藤崎 律</title>
+<meta name="description" content="24歳の秋に独立準備を始めた藤崎律が、「AIで記事を書く」ではなく「AIにクライアントを学ばせてから書く」というアプローチを選んだ理由を綴ります。独立準備中の資金5万円から、どんな人の役に立ちたいかを書いた自己紹介記事です。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --quote-bg: #fafaf5;
+    --quote-border: #c8b58a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #3a4a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .quote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    padding: 18px 24px;
+    margin: 24px 0;
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: #333;
+  }
+  .quote p:last-child { margin-bottom: 0; }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+
+  .related {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 32px 0 24px;
+    font-size: 14.5px;
+  }
+  .related h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .related ul { margin: 0; padding-left: 20px; }
+  .related li { padding: 4px 0; }
+  .related a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  .related a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">ABOUT ・ 執筆：藤崎 律 ・ 想定読了時間 6分</div>
+  <h1>なぜ、僕はAIで記事を書くことにしたのか</h1>
+
+  <p class="lead">
+    はじめまして、藤崎 律です。24歳フリーランスライター（独立準備中）として、医療・金融・法律などのYMYL領域を中心に執筆しています。この記事では、「AIで記事を書く」のではなく「AIにクライアントを学ばせてから書く」というアプローチを選ぶまでに、僕の中で何があったのかを書いていきます。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">24歳の秋、会社を離れた</a></li>
+      <li><a href="#s2">選択肢が「書くこと」だった理由</a></li>
+      <li><a href="#s3">「AIと一緒に書く」を選んだ理由</a></li>
+      <li><a href="#s4">どんな人の役に立ちたいか</a></li>
+      <li><a href="#s5">まだ、カウントダウンの途中にいる</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. 24歳の秋、会社を離れた</h2>
+  <p>2026年10月、僕は会社員の仕事を離れて、独立準備を始めました。</p>
+  <p>手元に残った資金は、ちょうど5万円。</p>
+  <p>それと、僕自身で決めた猶予期間が、約3ヶ月。</p>
+  <p>この3ヶ月のあいだに食べていける道筋が見えなければ、もう一度どこかに勤める。そういう覚悟で始めた独立準備です。</p>
+
+  <h3>「独立」という言葉のきれいさの、裏側</h3>
+  <p>「独立」や「フリーランス」という言葉は、SNSで眺めているときには少しかっこよく響きます。</p>
+  <p>でも実際にその日が来ると、まず不安が先に立ちます。</p>
+  <p>月末までに必要な生活費はどのくらいか。来月の家賃と光熱費は払えるのか。食費は切り詰めるとしても、通院費はどこから出すのか。頭の中は、現実的な数字で埋まります。</p>
+  <p>それでも始めたのは、「この3ヶ月に全部を賭けてみる」ことが、今の自分には必要だと感じたからです。</p>
+
+  <div class="note">
+    <strong>この記事で伝えたいこと：</strong>僕のライター業は、理想や憧れからではなく、「3ヶ月で生きていける仕事を作る」という現実からスタートしました。だからこそ、クライアントとの関係も、ごまかさず、長く続くものを選びたいと考えています。
+  </div>
+
+  <h2 id="s2">2. 選択肢が「書くこと」だった理由</h2>
+  <p>独立するとき、何を仕事にするかを決めるのに、そこまで時間はかかりませんでした。</p>
+  <p>自分と相性が良いと感じたのは、「書くこと」でした。</p>
+
+  <h3>体の調子に左右されても、言葉は積み上げられる</h3>
+  <p>僕はアトピー性皮膚炎を持っていて、月に1回の通院を続けています。</p>
+  <p>肌の調子が悪い日は、体力も気力も落ちます。会社員時代、「今日はきついな」という日に、満員電車や対面の打ち合わせがつらく感じる場面が何度もありました。</p>
+  <p>そんなときでも、文章は書けます。</p>
+  <p>場所を選ばず、時間を選ばず、調子が悪い日に無理をしなくても、調子のいい日に取り戻せる。言葉は、僕の体のリズムと折り合いのつく仕事でした。</p>
+
+  <h3>一行で、誰かの気持ちが動くことがある</h3>
+  <p>もう一つ、書く仕事を選んだ理由があります。</p>
+  <p>自分がこれまでに書いた文章で、ごく小さなことでも、誰かから「読んでよかった」と言ってもらえた経験が、少しずつでも積み重なっていたことです。</p>
+  <p>一行で、誰かの気持ちが動くことがある。それが仕事になるのなら、僕はこの道でやってみたいと思いました。</p>
+
+  <h2 id="s3">3. 「AIと一緒に書く」を選んだ理由</h2>
+  <p>ライターとして始めるとき、いちばん迷ったのは、「AIをどう扱うか」でした。</p>
+
+  <h3>AIで書くか、AIを使わないか、ではない</h3>
+  <p>2026年の今、「AIで記事を書くライター」はこの1年で一気に増えました。</p>
+  <p>同時に、「AIに丸投げして書かれた記事」と、「人が書いた記事」の差を、クライアントもすぐに見抜けるようになってきています。</p>
+  <p>選ぶべき道は、「AIで書く」でも「AIを使わない」でもないと、僕は考えました。</p>
+
+  <div class="quote">
+    <p>AIで記事を書くのではなく、AIにクライアントを学ばせてから書く。</p>
+  </div>
+
+  <p>これが、僕のたどり着いた答えです。</p>
+
+  <h3>クライアントの理念・レギュを、AIに学ばせる</h3>
+  <p>医療・金融・法律のようなYMYL領域では、クライアントごとに「絶対に使ってほしくない表現」や「大切にしている理念」があります。</p>
+  <p>この部分を、人の目で読み込み、言語化し、AIに「このクライアントのプロファイル」として渡す。</p>
+  <p>そうすると、AIは「平均的な記事」ではなく、「このクライアントの雰囲気そのままの初稿」を出してくれるようになります。</p>
+  <p>そこから先の、読者への寄り添いの一文や、専門用語の優しい言い換えは、必ず自分の手で足していきます。</p>
+
+  <h3>速くて、質も担保できる</h3>
+  <p>この方法のいちばんの価値は、「速いだけじゃない」ことだと思っています。</p>
+  <p>速いだけなら、AIに全部任せた方が速い。</p>
+  <p>でも、速くて、しかもクライアントが読んで「うちの雰囲気そのまま」と感じられる記事を出すには、「書く前のヒアリング」と「AIへの学ばせ方」が必要です。</p>
+  <p>この手順は、僕が独立準備の3ヶ月の中で、独学で組み立ててきたものです。</p>
+
+  <div class="note">
+    <strong>詳しい手順については別記事で：</strong>この「AIにクライアントを学ばせる」具体的な5ステップは、<a href="writing-process.html">「クライアントの理念を記事に落とすまで」</a>に書いています。技術的な分解は、<a href="ai-regulation.html">「AIで案件レギュを完全再現する」とはどういうことか</a>も合わせてご覧ください。
+  </div>
+
+  <h2 id="s4">4. どんな人の役に立ちたいか</h2>
+  <p>独立準備を始めてから、自分がどんな仕事を続けたいかが、少しずつ見えてきました。</p>
+
+  <h3>理念で勝負している、小さなクライアントと</h3>
+  <p>これから長く一緒に歩きたいのは、理念や想いで勝負している、小さなクライアントです。</p>
+  <p>たとえば、地域の医療機関、独立系のファイナンシャルプランナー、まちの司法書士事務所。</p>
+  <p>大手のメディアと違って、言葉の一つひとつが、お客様との信頼に直接つながる場所。</p>
+  <p>「速さ・安さ」のライターではなく、「このクライアントのために書けるライター」でありたいと思っています。</p>
+
+  <h3>YMYL領域で、正確さを担保できる書き手でありたい</h3>
+  <p>医療・金融・法律のYMYL（Your Money or Your Life）領域は、記事ひとつが読者の生活や判断に影響します。</p>
+  <p>だからこそ、一次情報（厚生労働省・各学会のガイドライン・金融庁のレポート・法律の条文など）を確認して書くことを、僕は譲りません。</p>
+  <p>AIが引用した統計も、必ず公式サイトで裏取りしてから納品します。</p>
+  <p>「速くて正確な記事を出せるライター」であることで、小さなクライアントの一人目の執筆パートナーになれたら、僕にとって一番幸せな仕事です。</p>
+
+  <h2 id="s5">5. まだ、カウントダウンの途中にいる</h2>
+  <p>この記事を書いている今も、僕は独立猶予3ヶ月のカウントダウンの途中にいます。</p>
+  <p>食べていける道筋が見えているとは、まだ言えません。</p>
+  <p>でも、クラウドワークスで初めての受注・納品にたどり着き、総合評価5.0をいただくところまでは来られました。</p>
+  <p>一歩ずつ、「このクライアントのために書けた」という実感を積み重ねていくことが、今の僕の仕事の全部です。</p>
+  <p>もしここまで読んでくださった方の中に、「理念の伝わる記事を書いてほしい」と感じているクライアント様がいらっしゃいましたら、ぜひ一度お声がけください。</p>
+  <p>僕にとって、一つひとつの依頼が、独立準備の3ヶ月を一歩前に進める材料になります。</p>
+
+  <div class="related">
+    <h4>この記事と関係のある記事</h4>
+    <ul>
+      <li><a href="writing-process.html">クライアントの理念を記事に落とすまで｜ヒアリングから擦り合わせまでの5ステップ</a></li>
+      <li><a href="ai-regulation.html">「AIで案件レギュを完全再現する」とはどういうことか｜人力ライターとの違いを分解する</a></li>
+      <li><a href="delivery-process.html">初めてAIライターに依頼される方へ｜打ち合わせから納品まで、各段階の実物サンプルを全部見せます</a></li>
+    </ul>
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
