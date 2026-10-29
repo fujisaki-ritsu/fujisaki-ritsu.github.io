@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIで書くライターが、丸投げしないと決めた理由｜藤崎 律</title>
+<meta name="description" content="AIが1分で記事を書く時代に、「AIで書くライター」藤崎律が丸投げしないと決めた3つの理由を綴ります。読者の体温・クライアントの固有性・書き手の責任。独学で学んでいる3つの技術と、AIを道具として使い切る線引きについて。">
+<style>
+  :root {
+    --text: #222;
+    --sub: #555;
+    --line: #e5e5e5;
+    --accent: #5a6a7a;
+    --bg: #fdfdfb;
+    --note-bg: #f0f3f6;
+    --note-border: #a5b2c0;
+    --reason-bg: #f5f7f9;
+    --reason-border: #5a6a7a;
+    --quote-bg: #fafaf5;
+    --quote-border: #c8b58a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.95;
+    margin: 0;
+    padding: 0 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+  .meta {
+    color: var(--sub);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.5;
+    margin: 8px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: #3a4a5a;
+    font-weight: 700;
+  }
+  p { margin: 0 0 18px; }
+  .lead {
+    font-size: 15.5px;
+    color: #333;
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    line-height: 1.9;
+  }
+  .toc {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 28px;
+    margin: 32px 0 40px;
+    font-size: 15px;
+  }
+  .toc h4 { margin: 0 0 12px; font-size: 15px; color: var(--sub); letter-spacing: 0.06em; }
+  .toc ol { margin: 0; padding-left: 24px; }
+  .toc li { padding: 4px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  /* 3つの理由ボックス */
+  .reason {
+    background: var(--reason-bg);
+    border-left: 4px solid var(--reason-border);
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+  .reason-label {
+    display: inline-block;
+    background: var(--reason-border);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  }
+  .reason h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    color: #2a3a4a;
+  }
+
+  .quote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    padding: 18px 24px;
+    margin: 24px 0;
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: #333;
+  }
+  .quote p:last-child { margin-bottom: 0; }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 14.5px;
+  }
+  table.compare th, table.compare td {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th {
+    background: #e7ecf1;
+    font-weight: 700;
+    width: 36%;
+  }
+
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+
+  .author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 24px 26px;
+    margin-top: 40px;
+  }
+  .author-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #b8c4d6, #8ba3c7);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: serif; font-size: 26px; font-weight: 700;
+  }
+  .author-body { font-size: 14.5px; line-height: 1.9; color: var(--text); }
+  .author-body strong { font-size: 16px; display: block; margin-bottom: 4px; }
+  strong { color: #1a1a1a; }
+
+  .related {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    margin: 32px 0 24px;
+    font-size: 14.5px;
+  }
+  .related h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .related ul { margin: 0; padding-left: 20px; }
+  .related li { padding: 4px 0; }
+  .related a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  .related a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .container { padding: 32px 0 64px; }
+    table.compare th, table.compare td { padding: 8px 10px; font-size: 13.5px; }
+    .reason { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<article class="container">
+  <div class="meta">ABOUT ・ 執筆：藤崎 律 ・ 想定読了時間 7分</div>
+  <h1>AIで書くライターが、丸投げしないと決めた理由</h1>
+
+  <p class="lead">
+    AIに「〇〇について3,000字で書いて」と頼むと、1分で記事が出てきます。それは便利です。でも、僕はその使い方を選びませんでした。「AIで書くライター」として、どこまでAIに任せ、どこで止めるのか。この記事では、丸投げしないと決めた3つの理由と、僕なりの線引きを綴ります。
+  </p>
+
+  <div class="toc">
+    <h4>目次</h4>
+    <ol>
+      <li><a href="#s1">1分で記事ができる時代の、怖さ</a></li>
+      <li><a href="#s2">丸投げしないと決めた3つの理由</a></li>
+      <li><a href="#s3">僕のAIの使い方｜道具としての線引き</a></li>
+      <li><a href="#s4">独学で学んでいる3つのこと</a></li>
+      <li><a href="#s5">道具として、使い切る</a></li>
+    </ol>
+  </div>
+
+  <h2 id="s1">1. 1分で記事ができる時代の、怖さ</h2>
+  <p>2026年の今、AIに短い指示を出すだけで、1分で3,000字の記事が返ってきます。</p>
+  <p>この技術は、素直にすごいと思います。</p>
+  <p>ただ、「それをそのまま納品することが、仕事として正しいのか」は、別の問いだと感じています。</p>
+
+  <h3>便利と、仕事の価値は違う</h3>
+  <p>AIが出した初稿は、確かにまとまって見えます。でも、よく読むと、こう感じることが多いです。</p>
+
+  <div class="quote">
+    <p>「正しいけれど、どのメディアにも合わない。」</p>
+    <p>「読みやすいけれど、心が動かない。」</p>
+    <p>「情報は揃っているけれど、書き手の存在感がない。」</p>
+  </div>
+
+  <p>これをそのまま納品すると、クライアントから戻ってくるのはだいたい同じ反応です。</p>
+  <p>「うちの雰囲気と、ちょっと違うんですよね」。</p>
+  <p>便利さと、仕事として納品できる品質は、同じではありません。この違いが、僕が丸投げしないと決めた入り口でした。</p>
+
+  <div class="note">
+    <strong>この記事で伝えたいこと：</strong>AIは強力な道具ですが、道具はそれを扱う人の判断があって初めて価値になります。「AIで書くか、人が書くか」ではなく「AIをどこまで使い、どこで止めるか」を考えることが、これからのライターの仕事だと思っています。
+  </div>
+
+  <h2 id="s2">2. 丸投げしないと決めた3つの理由</h2>
+  <p>僕がAIに丸投げしない理由は、3つあります。それぞれ、理由はシンプルです。</p>
+
+  <div class="reason">
+    <span class="reason-label">REASON 1</span>
+    <h3>読者の体温が消えるから</h3>
+    <p>AIが出す文章は、平均的にうまくまとまります。それはいいことです。ただ、「平均」の中には、読者の心を動かす一文は含まれていません。</p>
+    <p>「お子さんを思うからこその気持ちです」。</p>
+    <p>「不安になるのは、当然のことです」。</p>
+    <p>こうした、読者に寄り添う一文は、AIも書けはします。でも、「この章のここに、この一文を置くべきだ」と判断するのは、書き手の仕事です。この判断を手放すと、記事全体から体温が消えます。</p>
+  </div>
+
+  <div class="reason">
+    <span class="reason-label">REASON 2</span>
+    <h3>クライアントの固有性が消えるから</h3>
+    <p>AIが出す初稿は、「どのメディアでも通用しそうな」記事になります。これは、裏返せば「どのメディアにも固有性がない」記事です。</p>
+    <p>医療クリニックには、そのクリニックの治療方針があります。独立系FP事務所には、「売らない相談」を貫く理念があります。司法書士事務所には、「兄弟仲を壊さない相続」の姿勢があります。</p>
+    <p>この固有性を、AIが初稿で表現してくれることはありません。人の目でクライアントを読み込み、言語化し、AIに「このクライアントのプロファイル」として渡して初めて、固有性のある初稿が返ってきます。</p>
+    <p>プロファイルを作る工程を手放すと、クライアントの固有性は消えます。</p>
+  </div>
+
+  <div class="reason">
+    <span class="reason-label">REASON 3</span>
+    <h3>書き手の責任が消えるから</h3>
+    <p>特にYMYL（医療・金融・法律）の領域では、記事ひとつが読者の生活や判断に影響します。</p>
+    <p>AIは、もっともらしい統計や制度を引用することがあります。でも、その中には、古い情報や、文脈を誤解した引用が混じります。</p>
+    <p>これをそのまま納品することは、技術的には可能です。ですが、記事に名前（またはペンネーム）を載せて納品する以上、情報の正確性は書き手の責任です。</p>
+    <p>「AIが書いたから」は、公開後に通用しません。この責任を引き受けないのであれば、僕はこの仕事を選んでいなかったと思います。</p>
+  </div>
+
+  <h2 id="s3">3. 僕のAIの使い方｜道具としての線引き</h2>
+  <p>丸投げしないと決めた以上、どこまでAIに任せるかを、明確にしておく必要があります。</p>
+
+  <h3>AIに任せる工程と、人の手で仕上げる工程</h3>
+  <p>僕の中では、工程を次のように分けています。</p>
+
+  <table class="compare">
+    <tr><th>AIに任せる工程</th><td>情報整理／構成案の下書き／文体の下書き／章ごとの自己チェック（禁止表現に抵触していないか）</td></tr>
+    <tr><th>人の手で仕上げる工程</th><td>ヒアリングと言語化／クライアント・プロファイルの作成／一次情報の裏取り／読者への寄り添いの一文／納品前の最終通読</td></tr>
+  </table>
+
+  <p>この線引きは、技術的に「AIが苦手だから」ではありません。「ここは人が責任を持つべきだから」で決めています。</p>
+
+  <h3>「速さ」のためにAIを使い、「質」のために人が仕上げる</h3>
+  <p>AIを使うことで、下書きの時間は確かに短くなります。</p>
+  <p>短くなった時間を、ヒアリングと裏取りと読者への寄り添いに注ぐ。これが、僕の中での「AI活用」の形です。</p>
+  <p>AIを使って早く帰るのではなく、AIを使って良い記事を納品するために時間を使う。この向きだけは、崩さないようにしています。</p>
+
+  <div class="note">
+    <strong>具体的な工程は別記事で：</strong>この「AIにクライアントを学ばせる」技術的な分解は、<a href="ai-regulation.html">「AIで案件レギュを完全再現する」とはどういうことか</a>に書いています。段階ごとの実物サンプルは、<a href="delivery-process.html">「打ち合わせから納品まで、各段階の実物サンプル」</a>も合わせてご覧ください。
+  </div>
+
+  <h2 id="s4">4. 独学で学んでいる3つのこと</h2>
+  <p>独立準備を始めてから、僕が独学で学び続けている技術は、大きく分けて3つあります。</p>
+
+  <h3>プロンプト設計｜クライアント・プロファイルの作り方</h3>
+  <p>AIに「このクライアントの雰囲気で書いて」と伝えるために、ヒアリング内容を構造化してAIに渡す技術です。</p>
+  <p>単に「医療っぽく書いて」ではなく、「院の方針」「NG表現」「読者層」「CTAの温度」などを分解してプロンプトに組み込みます。この設計精度が、初稿の質を決めます。</p>
+
+  <h3>一次情報の裏取り｜公式サイトまで戻って確認する</h3>
+  <p>AIが引用した統計・ガイドライン・制度を、必ず公式サイトまで戻って確認する技術です。</p>
+  <p>厚生労働省、日本皮膚科学会、金融庁、国税庁、法務省。それぞれのサイトで、情報の最新版と原文を確認します。この手間を省略すると、記事の信頼性は一瞬で失われます。</p>
+
+  <h3>文体の添削｜AIが書いた一文を、人が仕上げる</h3>
+  <p>AI出力特有のクセ（曖昧な結語、抽象的な説明、一般論の繰り返し）を、人の手で直す技術です。</p>
+  <p>「〜と言えるでしょう」を具体に書き直す。「様々な方法があります」を3つの具体例に展開する。「大切です」の後に、なぜ大切かを一文足す。この添削は、まだAIには任せられない部分だと感じています。</p>
+
+  <h2 id="s5">5. 道具として、使い切る</h2>
+  <p>この記事で書いてきたことは、要するに1つの考え方に収束します。</p>
+
+  <div class="quote">
+    <p>AIは、道具である。</p>
+    <p>道具は、それを扱う人の判断があって初めて価値になる。</p>
+  </div>
+
+  <p>包丁という道具は、料理人という使い手が、正しい使い方をすることで、はじめて料理という結果を生みます。カメラという道具は、撮影者という使い手が、意図を込めた使い方をすることで、はじめて写真という作品になります。AIも同じです。扱う人の判断を手放した瞬間、道具は「誰にでも扱える、ありふれたもの」に成り下がってしまいます。</p>
+  <p>僕は、AIを雑に扱わないライターでいたいと思っています。</p>
+  <p>便利な道具を、便利さのために使い切るのではなく、良い記事を納品するために使い切る。この向きを、独立準備の3ヶ月のあいだも、その先も、崩さずに続けていきたいと思っています。</p>
+
+  <div class="related">
+    <h4>この記事と関係のある記事</h4>
+    <ul>
+      <li><a href="about-fujisaki.html">なぜ、僕はAIで記事を書くことにしたのか</a>（③-1 自己紹介）</li>
+      <li><a href="writing-process.html">クライアントの理念を記事に落とすまで｜ヒアリングから擦り合わせまでの5ステップ</a></li>
+      <li><a href="ai-regulation.html">「AIで案件レギュを完全再現する」とはどういうことか｜人力ライターとの違いを分解する</a></li>
+      <li><a href="delivery-process.html">初めてAIライターに依頼される方へ｜打ち合わせから納品まで、各段階の実物サンプルを全部見せます</a></li>
+    </ul>
+  </div>
+
+  <div class="author">
+    <div class="author-avatar">律</div>
+    <div class="author-body">
+      <strong>執筆：藤崎 律（ふじさき りつ）</strong>
+      24歳フリーランスライター（独立準備中）。医療・金融・法律などYMYL領域で、クライアントの事務所方針や理念を事前にヒアリングし、AIを活用した執筆支援環境で、架空の案件も実案件と同じ精度で仕上げます。得意ジャンルは「体験ベースのYMYL」「AI × 業務効率化」「20代キャリア・独立準備」。
+    </div>
+  </div>
+</article>
+</body>
+</html>
